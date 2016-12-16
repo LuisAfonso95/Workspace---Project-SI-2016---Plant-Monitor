@@ -208,13 +208,13 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200              0x17fc          0x23fa  (9210)
-.const                      0x19fc                 0x4             0x6  (6)
-.text                       0x1a00               0x266           0x399  (921)
-.dinit                      0x1c66                0xee           0x165  (357)
-.init.delay32               0x1d54                0x1c            0x2a  (42)
-.shared.dinit               0x1d70                 0x2             0x3  (3)
+.const                      0x19fc                 0x6             0x9  (9)
+.text                       0x1a02               0x250           0x378  (888)
+.dinit                      0x1c52                0xee           0x165  (357)
+.init.delay32               0x1d40                0x1c            0x2a  (42)
+.shared.dinit               0x1d5c                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):         0x292b  (10539) 65%
+                 Total program memory used (bytes):         0x290d  (10509) 65%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -349,28 +349,28 @@ External Symbols in Program Memory (by address):
                   0x001938                  __dunpack
                   0x001986                  ___floatdidf
                   0x0019a6                  ___floatundidf
-                  0x001a00                  _ConfigCLK
-                  0x001a1a                  _UART1Init
-                  0x001a42                  _putChar1
-                  0x001a5c                  _getChar1
-                  0x001a70                  _check_sum_values
-                  0x001a80                  _ConfigADC
-                  0x001a98                  _send_16bit_values
-                  0x001b2c                  _readADC
-                  0x001b46                  _ConfigIO
-                  0x001b54                  _CalculoTemperatura
-                  0x001c02                  _main
-                  0x001d54                  ___delay32
+                  0x001a02                  _ConfigCLK
+                  0x001a1c                  _UART1Init
+                  0x001a44                  _putChar1
+                  0x001a5e                  _getChar1
+                  0x001a72                  _check_sum_values
+                  0x001a82                  _ConfigADC
+                  0x001a9a                  _send_16bit_values
+                  0x001b2e                  _readADC
+                  0x001b48                  _ConfigIO
+                  0x001b56                  _CalculoTemperatura
+                  0x001c04                  _main
+                  0x001d40                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x001b54                  _CalculoTemperatura
-                  0x001a80                  _ConfigADC
-                  0x001a00                  _ConfigCLK
-                  0x001b46                  _ConfigIO
-                  0x001a1a                  _UART1Init
+                  0x001b56                  _CalculoTemperatura
+                  0x001a82                  _ConfigADC
+                  0x001a02                  _ConfigCLK
+                  0x001b48                  _ConfigIO
+                  0x001a1c                  _UART1Init
                   0x0012b8                  __Atexit
                   0x001182                  __Closreg
                   0x001244                  __DNKfflush
@@ -389,7 +389,7 @@ External Symbols in Program Memory (by name):
                   0x000902                  ___Putfld_fF
                   0x0017ac                  ___adddf3
                   0x00037c                  ___addsf3
-                  0x001d54                  ___delay32
+                  0x001d40                  ___delay32
                   0x0014ba                  ___divdf3
                   0x000436                  ___divsf3
                   0x00156e                  ___divsi3
@@ -438,21 +438,21 @@ External Symbols in Program Memory (by name):
                   0x00078e                  __printf_fF
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001a70                  _check_sum_values
+                  0x001a72                  _check_sum_values
                   0x000dfe                  _div
                   0x001194                  _fclose
                   0x001368                  _free
                   0x000e14                  _fwrite
-                  0x001a5c                  _getChar1
+                  0x001a5e                  _getChar1
                   0x000ebc                  _ldiv
                   0x00053a                  _logf
-                  0x001c02                  _main
+                  0x001c04                  _main
                   0x001432                  _malloc
                   0x000ee6                  _memchr
                   0x000efa                  _memcpy
-                  0x001a42                  _putChar1
-                  0x001b2c                  _readADC
-                  0x001a98                  _send_16bit_values
+                  0x001a44                  _putChar1
+                  0x001b2e                  _readADC
+                  0x001a9a                  _send_16bit_values
                   0x000f08                  _strchr
                   0x001224                  fclose.XXelo:_closeall
                   0x000772                  printf_fF.XXeo:_prout
@@ -729,18 +729,18 @@ __FICD
  *(.comment)
  .comment         0x000000         0x5e f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-c-elf.a(xfiles.XXeo)
 
-.debug_info       0x000000        0xd1a
+.debug_info       0x000000        0xd1d
  *(.debug_info)
- .debug_info      0x000000        0xd1a build/default/production/NTC.o
+ .debug_info      0x000000        0xd1d build/default/production/NTC.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x155
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x155 build/default/production/NTC.o
 
-.debug_line       0x000000        0x13e
+.debug_line       0x000000        0x13d
  *(.debug_line)
- .debug_line      0x000000        0x13e build/default/production/NTC.o
+ .debug_line      0x000000        0x13d build/default/production/NTC.o
 
 .debug_frame      0x000000        0x154
  *(.debug_frame)
@@ -1731,29 +1731,29 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/NTC.o
 
-.const              0x99fc          0x4 load address 0x0019fc  
- .const             0x99fc          0x4 build/default/production/NTC.o
+.const              0x99fc          0x6 load address 0x0019fc  
+ .const             0x99fc          0x6 build/default/production/NTC.o
 
-.text             0x001a00        0x266
- .text            0x001a00        0x266 build/default/production/NTC.o
-                  0x001a00                  _ConfigCLK
-                  0x001a1a                  _UART1Init
-                  0x001a42                  _putChar1
-                  0x001a5c                  _getChar1
-                  0x001a70                  _check_sum_values
-                  0x001a80                  _ConfigADC
-                  0x001a98                  _send_16bit_values
-                  0x001b2c                  _readADC
-                  0x001b46                  _ConfigIO
-                  0x001b54                  _CalculoTemperatura
-                  0x001c02                  _main
+.text             0x001a02        0x250
+ .text            0x001a02        0x250 build/default/production/NTC.o
+                  0x001a02                  _ConfigCLK
+                  0x001a1c                  _UART1Init
+                  0x001a44                  _putChar1
+                  0x001a5e                  _getChar1
+                  0x001a72                  _check_sum_values
+                  0x001a82                  _ConfigADC
+                  0x001a9a                  _send_16bit_values
+                  0x001b2e                  _readADC
+                  0x001b48                  _ConfigIO
+                  0x001b56                  _CalculoTemperatura
+                  0x001c04                  _main
 
-.dinit            0x001c66         0xee
- .dinit           0x001c66         0xee data_init
+.dinit            0x001c52         0xee
+ .dinit           0x001c52         0xee data_init
 
-.init.delay32     0x001d54         0x1c
- .init.delay32    0x001d54         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x001d54                  ___delay32
+.init.delay32     0x001d40         0x1c
+ .init.delay32    0x001d40         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x001d40                  ___delay32
 
-.shared.dinit     0x001d70          0x2
- .shared.dinit    0x001d70          0x2 shared_data_init
+.shared.dinit     0x001d5c          0x2
+ .shared.dinit    0x001d5c          0x2 shared_data_init

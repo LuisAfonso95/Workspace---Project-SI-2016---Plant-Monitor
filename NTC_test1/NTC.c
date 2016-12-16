@@ -3,6 +3,17 @@
  * Author: filip
  *
  * 
+ * At 100ºC (283.15K), read 252 = 0.3076V = 0.99383kohm
+ * At 0ºC (271.15K)(not accurate), 25kohm (parece ser acima disso)
+ * B = 3.287kohm
+ * 
+ * NTC luis:
+ *  (14.95kohm)
+ *   At 100ºC (283.15K), read 216 = 832.27ohm
+ *  At 0ºC (271.15K)(not accurate), 25kohm (parece ser acima disso)
+ * 
+ * B = 3358 ohm
+ * 
  * Inputs: 
  *  - Pin 26 - Analog 9
  * 
@@ -15,6 +26,12 @@
 #include <stdio.h>
 #include <math.h>
 #include <libpic30.h>
+#include <stdint.h>
+
+#define _BETHA_ 3507
+#define _R0_ 26000
+#define _T0_ 273
+#define RDIVIDER 14950
 
 
 #define SYNC1 0XAB
@@ -125,30 +142,34 @@ inline void ConfigIO(void)
     ANSB = ~0x0484;         // RX1, TX1, RB10 digitais, restantes analogicos;
     TRISB= 0b1111111101111111;
 }
-inline float CalculoTemperatura(float Vadc){
+
+
+inline float CalculoTemperatura(unsigned int Reading){
     
     float R1,RT,R0,Vout,V,beta,T0,T,Temp;
-    T0=298.15;
+    T0 = _T0_;
     V = 5;
-    beta=2500;
-    R1=15060;
-    R0=10000;
-    Vout=(5*Vadc)/4095;
+    beta = _BETHA_;
+    R1 = RDIVIDER;
+    R0 = _R0_;
+    Vout=(5.0*Reading)/4096.0;
     RT=(R1*Vout)/(V-Vout);
-    T=(log(RT/R0)/beta)+1/T0;
+    T=(log(RT/R0)/beta)+(1/T0);
     T=1/T;
-    Temp=T-273.15;
+    Temp = T-273.15;
+    
     return Temp;
 }
 
 int main(void) {
     
     ConfigCLK();
-    UART1Init(19200);
+    UART1Init(9600);
     ConfigIO();
     ConfigADC();
     int i;
-    float Vadc,Temp;
+    unsigned int Vadc;
+    float Temp;
     while(1){
         Vadc=0;
         for(i = 0; i < 16; i++){
@@ -156,8 +177,9 @@ int main(void) {
             __delay_ms(6); 
         }
         Vadc=Vadc/16;
-        Temp = CalculoTemperatura(Vadc);
-        printf("\r%f",Temp);
+        Temp = (CalculoTemperatura(Vadc));
+        //(&Temp, 1);
+        printf("%f\r\n",Temp);
     }
     
     
