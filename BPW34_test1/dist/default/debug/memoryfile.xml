@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <executable name="dist/default/debug/BPW34_test1.debug.elf">
+    <memory name="data">
+      <units>bytes</units>
+      <length>2048</length>
+      <used>84</used>
+      <free>1964</free>
+    </memory>
+    <memory name="program">
+      <units>bytes</units>
+      <length>16128</length>
+      <used>1722</used>
+      <free>14406</free>
+    </memory>
+  </executable>
+</project>
