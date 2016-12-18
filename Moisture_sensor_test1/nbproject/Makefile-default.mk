@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Moisture_sensor_test1.c
+SOURCEFILES_QUOTED_IF_SPACED=Moisture_sensor_test1.c UART_utils.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Moisture_sensor_test1.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Moisture_sensor_test1.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Moisture_sensor_test1.o ${OBJECTDIR}/UART_utils.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Moisture_sensor_test1.o.d ${OBJECTDIR}/UART_utils.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Moisture_sensor_test1.o
+OBJECTFILES=${OBJECTDIR}/Moisture_sensor_test1.o ${OBJECTDIR}/UART_utils.o
 
 # Source Files
-SOURCEFILES=Moisture_sensor_test1.c
+SOURCEFILES=Moisture_sensor_test1.c UART_utils.c
 
 
 CFLAGS=
@@ -95,6 +95,13 @@ ${OBJECTDIR}/Moisture_sensor_test1.o: Moisture_sensor_test1.c  nbproject/Makefil
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Moisture_sensor_test1.c  -o ${OBJECTDIR}/Moisture_sensor_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Moisture_sensor_test1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Moisture_sensor_test1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/UART_utils.o: UART_utils.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/UART_utils.o.d 
+	@${RM} ${OBJECTDIR}/UART_utils.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_utils.c  -o ${OBJECTDIR}/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART_utils.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/Moisture_sensor_test1.o: Moisture_sensor_test1.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -102,6 +109,13 @@ ${OBJECTDIR}/Moisture_sensor_test1.o: Moisture_sensor_test1.c  nbproject/Makefil
 	@${RM} ${OBJECTDIR}/Moisture_sensor_test1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Moisture_sensor_test1.c  -o ${OBJECTDIR}/Moisture_sensor_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Moisture_sensor_test1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Moisture_sensor_test1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/UART_utils.o: UART_utils.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/UART_utils.o.d 
+	@${RM} ${OBJECTDIR}/UART_utils.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_utils.c  -o ${OBJECTDIR}/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART_utils.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

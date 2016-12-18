@@ -13,7 +13,7 @@ delete(instrfindall);
 %while 1
 %end
 % Init and open the serial port
-s = serial('COM7', 'baudrate', 9600);
+s = serial('COM20', 'baudrate', 9600);
 fopen(s);
 
 

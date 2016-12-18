@@ -16,6 +16,7 @@ Command:
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/Moisture_sensor_test1.o \
+  build/default/production/UART_utils.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -50,7 +51,7 @@ f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
                               build/default/production/Moisture_sensor_test1.o (___delay32)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                              build/default/production/Moisture_sensor_test1.o (___udivsi3)
+                              build/default/production/UART_utils.o (___udivsi3)
 
 
 Selected CodeGuard Options:
@@ -82,12 +83,12 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xcc           0x132  (306)
-.text                        0x2cc               0x188           0x24c  (588)
-.init.delay32                0x454                0x1c            0x2a  (42)
-.dinit                       0x470                0x10            0x18  (24)
-.shared.dinit                0x480                 0x2             0x3  (3)
+.text                        0x2cc               0x186           0x249  (585)
+.init.delay32                0x452                0x1c            0x2a  (42)
+.dinit                       0x46e                0x10            0x18  (24)
+.shared.dinit                0x47e                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x3c3  (963) 5%
+                 Total program memory used (bytes):          0x3c0  (960) 5%
 
 
 Aivt Memory  [Origin = 0x104, Length = 0xfc]
@@ -136,39 +137,39 @@ External Symbols in Program Memory (by address):
                   0x0002ac                  ___udivsi3
                   0x0002cc                  _ConfigCLK
                   0x0002e6                  _UART1Init
-                  0x000310                  _getChar1
-                  0x000324                  _putChar1
-                  0x00033e                  _check_sum_values
-                  0x00034e                  _send_16bit_values
-                  0x0003e2                  _ConfigADC
-                  0x0003fa                  _readADC
-                  0x000414                  _ConfigIO
-                  0x000424                  _main
-                  0x000454                  ___delay32
+                  0x00030e                  _putChar1
+                  0x000328                  _getChar1
+                  0x00033c                  _check_sum_values
+                  0x00034c                  _send_16bit_values
+                  0x0003e0                  _ConfigADC
+                  0x0003f8                  _readADC
+                  0x000412                  _ConfigIO
+                  0x000422                  _main
+                  0x000452                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0003e2                  _ConfigADC
+                  0x0003e0                  _ConfigADC
                   0x0002cc                  _ConfigCLK
-                  0x000414                  _ConfigIO
+                  0x000412                  _ConfigIO
                   0x0002e6                  _UART1Init
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x000454                  ___delay32
+                  0x000452                  ___delay32
                   0x0002ac                  ___udivsi3
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00033e                  _check_sum_values
-                  0x000310                  _getChar1
-                  0x000424                  _main
-                  0x000324                  _putChar1
-                  0x0003fa                  _readADC
-                  0x00034e                  _send_16bit_values
+                  0x00033c                  _check_sum_values
+                  0x000328                  _getChar1
+                  0x000422                  _main
+                  0x00030e                  _putChar1
+                  0x0003f8                  _readADC
+                  0x00034c                  _send_16bit_values
 
 Memory Configuration
 
@@ -192,6 +193,7 @@ FICD             0xf8000e           0x000002
 Linker script and memory map
 
 LOAD build/default/production/Moisture_sensor_test1.o
+LOAD build/default/production/UART_utils.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
@@ -268,26 +270,31 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x10cd
+.debug_info       0x000000       0x11f6
  *(.debug_info)
- .debug_info      0x000000       0x10cd build/default/production/Moisture_sensor_test1.o
+ .debug_info      0x000000        0xbce build/default/production/Moisture_sensor_test1.o
+ .debug_info      0x000bce        0x628 build/default/production/UART_utils.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x189
+.debug_abbrev     0x000000        0x26f
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x189 build/default/production/Moisture_sensor_test1.o
+ .debug_abbrev    0x000000        0x12b build/default/production/Moisture_sensor_test1.o
+ .debug_abbrev    0x00012b        0x144 build/default/production/UART_utils.o
 
-.debug_line       0x000000        0x145
+.debug_line       0x000000        0x1cc
  *(.debug_line)
- .debug_line      0x000000        0x145 build/default/production/Moisture_sensor_test1.o
+ .debug_line      0x000000        0x10f build/default/production/Moisture_sensor_test1.o
+ .debug_line      0x00010f         0xbd build/default/production/UART_utils.o
 
-.debug_frame      0x000000        0x12c
+.debug_frame      0x000000        0x140
  *(.debug_frame)
- .debug_frame     0x000000        0x12c build/default/production/Moisture_sensor_test1.o
+ .debug_frame     0x000000         0x84 build/default/production/Moisture_sensor_test1.o
+ .debug_frame     0x000084         0xbc build/default/production/UART_utils.o
 
-.debug_str        0x000000         0x6a
+.debug_str        0x000000         0x63
  *(.debug_str)
- .debug_str       0x000000         0x6a build/default/production/Moisture_sensor_test1.o
+ .debug_str       0x000000         0x44 build/default/production/Moisture_sensor_test1.o
+ .debug_str       0x000044         0x1f build/default/production/UART_utils.o
 
 .debug_loc
  *(.debug_loc)
@@ -296,18 +303,22 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xbd
+                  0x000000         0xcf
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xbd build/default/production/Moisture_sensor_test1.o
+                  0x000000         0x5c build/default/production/Moisture_sensor_test1.o
+ .debug_pubnames
+                  0x00005c         0x73 build/default/production/UART_utils.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x18
+.debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/Moisture_sensor_test1.o
+ .debug_aranges
+                  0x000018         0x18 build/default/production/UART_utils.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1075,22 +1086,26 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000018        0x10a
+                  0x000030        0x11c
  .debug_pubtypes
-                  0x000018        0x10a build/default/production/Moisture_sensor_test1.o
+                  0x000030         0xca build/default/production/Moisture_sensor_test1.o
+ .debug_pubtypes
+                  0x0000fa         0x52 build/default/production/UART_utils.o
 
 __c30_signature
-                  0x000122         0x1e
+                  0x00014c         0x24
  __c30_signature
-                  0x000122          0x6 build/default/production/Moisture_sensor_test1.o
+                  0x00014c          0x6 build/default/production/Moisture_sensor_test1.o
  __c30_signature
-                  0x000128          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000152          0x6 build/default/production/UART_utils.o
  __c30_signature
-                  0x00012e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000158          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000134          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x00015e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x00013a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x000164          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+ __c30_signature
+                  0x00016a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
 
 .ndata              0x0800          0x2
  .ndata             0x0800          0x2 build/default/production/Moisture_sensor_test1.o
@@ -1116,25 +1131,26 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/Moisture_sensor_test1.o
 
-.text             0x0002cc        0x188
- .text            0x0002cc        0x188 build/default/production/Moisture_sensor_test1.o
+.text             0x0002cc        0x186
+ .text            0x0002cc        0x114 build/default/production/UART_utils.o
                   0x0002cc                  _ConfigCLK
                   0x0002e6                  _UART1Init
-                  0x000310                  _getChar1
-                  0x000324                  _putChar1
-                  0x00033e                  _check_sum_values
-                  0x00034e                  _send_16bit_values
-                  0x0003e2                  _ConfigADC
-                  0x0003fa                  _readADC
-                  0x000414                  _ConfigIO
-                  0x000424                  _main
+                  0x00030e                  _putChar1
+                  0x000328                  _getChar1
+                  0x00033c                  _check_sum_values
+                  0x00034c                  _send_16bit_values
+ .text            0x0003e0         0x72 build/default/production/Moisture_sensor_test1.o
+                  0x0003e0                  _ConfigADC
+                  0x0003f8                  _readADC
+                  0x000412                  _ConfigIO
+                  0x000422                  _main
 
-.init.delay32     0x000454         0x1c
- .init.delay32    0x000454         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x000454                  ___delay32
+.init.delay32     0x000452         0x1c
+ .init.delay32    0x000452         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000452                  ___delay32
 
-.dinit            0x000470         0x10
- .dinit           0x000470         0x10 data_init
+.dinit            0x00046e         0x10
+ .dinit           0x00046e         0x10 data_init
 
-.shared.dinit     0x000480          0x2
- .shared.dinit    0x000480          0x2 shared_data_init
+.shared.dinit     0x00047e          0x2
+ .shared.dinit    0x00047e          0x2 shared_data_init

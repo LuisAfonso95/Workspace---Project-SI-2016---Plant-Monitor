@@ -15,7 +15,8 @@ Command:
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC30F/gld \
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/analog_read.o \
+  build/default/production/BPW34_test1.o \
+  build/default/production/UART_utils_1.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -48,17 +49,17 @@ f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
                               f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o) (__data_init_standard)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                              build/default/production/analog_read.o (___delay32)
+                              build/default/production/BPW34_test1.o (___delay32)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                              build/default/production/analog_read.o (___fixunssfsi)
+                              build/default/production/BPW34_test1.o (___fixunssfsi)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                              build/default/production/analog_read.o (___floatunsisf)
+                              build/default/production/BPW34_test1.o (___floatunsisf)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
                               f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo) (__funpack)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                              build/default/production/analog_read.o (___mulsf3)
+                              build/default/production/BPW34_test1.o (___mulsf3)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                              build/default/production/analog_read.o (___udivsi3)
+                              build/default/production/BPW34_test1.o (___udivsi3)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
                               f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
@@ -98,12 +99,12 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x272           0x3ab  (939)
-.text                        0x472               0x1dc           0x2ca  (714)
-.init.delay32                0x64e                0x1c            0x2a  (42)
-.dinit                       0x66a                0x10            0x18  (24)
-.shared.dinit                0x67a                 0x2             0x3  (3)
+.text                        0x472               0x1da           0x2c7  (711)
+.init.delay32                0x64c                0x1c            0x2a  (42)
+.dinit                       0x668                0x10            0x18  (24)
+.shared.dinit                0x678                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x6ba  (1722) 10%
+                 Total program memory used (bytes):          0x6b7  (1719) 10%
 
 
 Aivt Memory  [Origin = 0x104, Length = 0xfc]
@@ -162,29 +163,29 @@ External Symbols in Program Memory (by address):
                   0x00046c                  __fbopReturnNaN
                   0x000472                  _ConfigCLK
                   0x00048c                  _UART1Init
-                  0x0004b6                  _getChar1
-                  0x0004ca                  _putChar1
-                  0x0004e4                  _check_sum_values
-                  0x0004f4                  _send_16bit_values
-                  0x000588                  _ConfigADC
-                  0x0005a0                  _readADC
-                  0x0005ba                  _ConfigIO
-                  0x0005cc                  _reading_To_lux
-                  0x00061e                  _main
-                  0x00064e                  ___delay32
+                  0x0004b4                  _putChar1
+                  0x0004ce                  _getChar1
+                  0x0004e2                  _check_sum_values
+                  0x0004f2                  _send_16bit_values
+                  0x000586                  _ConfigADC
+                  0x00059e                  _readADC
+                  0x0005b8                  _ConfigIO
+                  0x0005ca                  _reading_To_lux
+                  0x00061c                  _main
+                  0x00064c                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000588                  _ConfigADC
+                  0x000586                  _ConfigADC
                   0x000472                  _ConfigCLK
-                  0x0005ba                  _ConfigIO
+                  0x0005b8                  _ConfigIO
                   0x00048c                  _UART1Init
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x00064e                  ___delay32
+                  0x00064c                  ___delay32
                   0x0002ac                  ___fixunssfsi
                   0x000398                  ___floatundisf
                   0x0002e2                  ___floatunsisf
@@ -200,13 +201,13 @@ External Symbols in Program Memory (by name):
                   0x000442                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0004e4                  _check_sum_values
-                  0x0004b6                  _getChar1
-                  0x00061e                  _main
-                  0x0004ca                  _putChar1
-                  0x0005a0                  _readADC
-                  0x0005cc                  _reading_To_lux
-                  0x0004f4                  _send_16bit_values
+                  0x0004e2                  _check_sum_values
+                  0x0004ce                  _getChar1
+                  0x00061c                  _main
+                  0x0004b4                  _putChar1
+                  0x00059e                  _readADC
+                  0x0005ca                  _reading_To_lux
+                  0x0004f2                  _send_16bit_values
 
 Memory Configuration
 
@@ -229,7 +230,8 @@ FICD             0xf8000e           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/analog_read.o
+LOAD build/default/production/BPW34_test1.o
+LOAD build/default/production/UART_utils_1.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
@@ -333,26 +335,31 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1029
+.debug_info       0x000000       0x114a
  *(.debug_info)
- .debug_info      0x000000       0x1029 build/default/production/analog_read.o
+ .debug_info      0x000000        0xb2a build/default/production/BPW34_test1.o
+ .debug_info      0x000b2a        0x620 build/default/production/UART_utils_1.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x19f
+.debug_abbrev     0x000000        0x27d
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x19f build/default/production/analog_read.o
+ .debug_abbrev    0x000000        0x139 build/default/production/BPW34_test1.o
+ .debug_abbrev    0x000139        0x144 build/default/production/UART_utils_1.o
 
-.debug_line       0x000000        0x18e
+.debug_line       0x000000        0x218
  *(.debug_line)
- .debug_line      0x000000        0x18e build/default/production/analog_read.o
+ .debug_line      0x000000        0x159 build/default/production/BPW34_test1.o
+ .debug_line      0x000159         0xbf build/default/production/UART_utils_1.o
 
-.debug_frame      0x000000        0x148
+.debug_frame      0x000000        0x15c
  *(.debug_frame)
- .debug_frame     0x000000        0x148 build/default/production/analog_read.o
+ .debug_frame     0x000000         0xa0 build/default/production/BPW34_test1.o
+ .debug_frame     0x0000a0         0xbc build/default/production/UART_utils_1.o
 
-.debug_str        0x000000         0x6a
+.debug_str        0x000000         0x63
  *(.debug_str)
- .debug_str       0x000000         0x6a build/default/production/analog_read.o
+ .debug_str       0x000000         0x44 build/default/production/BPW34_test1.o
+ .debug_str       0x000044         0x1f build/default/production/UART_utils_1.o
 
 .debug_loc
  *(.debug_loc)
@@ -361,18 +368,22 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xd0
+                  0x000000         0xe2
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xd0 build/default/production/analog_read.o
+                  0x000000         0x6f build/default/production/BPW34_test1.o
+ .debug_pubnames
+                  0x00006f         0x73 build/default/production/UART_utils_1.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x18
+.debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/analog_read.o
+                  0x000000         0x18 build/default/production/BPW34_test1.o
+ .debug_aranges
+                  0x000018         0x18 build/default/production/UART_utils_1.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1140,83 +1151,88 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000018        0x124
+                  0x000030        0x136
  .debug_pubtypes
-                  0x000018        0x124 build/default/production/analog_read.o
+                  0x000030         0xe4 build/default/production/BPW34_test1.o
+ .debug_pubtypes
+                  0x000114         0x52 build/default/production/UART_utils_1.o
 
 __c30_signature
-                  0x00013c         0x4e
+                  0x000166         0x54
  __c30_signature
-                  0x00013c          0x6 build/default/production/analog_read.o
+                  0x000166          0x6 build/default/production/BPW34_test1.o
  __c30_signature
-                  0x000142          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00016c          0x6 build/default/production/UART_utils_1.o
  __c30_signature
-                  0x000148          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000172          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00014e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000178          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x000154          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x00017e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
  __c30_signature
-                  0x00015a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000184          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x000160          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x00018a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x000166          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000190          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x00016c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x000196          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x000172          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x00019c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
  __c30_signature
-                  0x000178          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x0001a2          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
  __c30_signature
-                  0x00017e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x0001a8          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000184          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0001ae          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+ __c30_signature
+                  0x0001b4          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
 
 .ndata              0x0800          0x2
- .ndata             0x0800          0x2 build/default/production/analog_read.o
+ .ndata             0x0800          0x2 build/default/production/BPW34_test1.o
                     0x0800                  ___C30_UART
 
 .nbss               0x0802          0x2
- .nbss              0x0802          0x2 build/default/production/analog_read.o
+ .nbss              0x0802          0x2 build/default/production/BPW34_test1.o
                     0x0802                  _values
 
 .config_ICS       0xf8000e          0x2
- .config_ICS      0xf8000e          0x2 build/default/production/analog_read.o
+ .config_ICS      0xf8000e          0x2 build/default/production/BPW34_test1.o
 
 .config_MCLRE     0xf8000c          0x2
- .config_MCLRE    0xf8000c          0x2 build/default/production/analog_read.o
+ .config_MCLRE    0xf8000c          0x2 build/default/production/BPW34_test1.o
 
 .config_WINDIS    0xf8000a          0x2
  .config_WINDIS
-                  0xf8000a          0x2 build/default/production/analog_read.o
+                  0xf8000a          0x2 build/default/production/BPW34_test1.o
 
 .config_FCKSM     0xf80008          0x2
- .config_FCKSM    0xf80008          0x2 build/default/production/analog_read.o
+ .config_FCKSM    0xf80008          0x2 build/default/production/BPW34_test1.o
 
 .config_IESO      0xf80006          0x2
- .config_IESO     0xf80006          0x2 build/default/production/analog_read.o
+ .config_IESO     0xf80006          0x2 build/default/production/BPW34_test1.o
 
-.text             0x000472        0x1dc
- .text            0x000472        0x1dc build/default/production/analog_read.o
+.text             0x000472        0x1da
+ .text            0x000472        0x114 build/default/production/UART_utils_1.o
                   0x000472                  _ConfigCLK
                   0x00048c                  _UART1Init
-                  0x0004b6                  _getChar1
-                  0x0004ca                  _putChar1
-                  0x0004e4                  _check_sum_values
-                  0x0004f4                  _send_16bit_values
-                  0x000588                  _ConfigADC
-                  0x0005a0                  _readADC
-                  0x0005ba                  _ConfigIO
-                  0x0005cc                  _reading_To_lux
-                  0x00061e                  _main
+                  0x0004b4                  _putChar1
+                  0x0004ce                  _getChar1
+                  0x0004e2                  _check_sum_values
+                  0x0004f2                  _send_16bit_values
+ .text            0x000586         0xc6 build/default/production/BPW34_test1.o
+                  0x000586                  _ConfigADC
+                  0x00059e                  _readADC
+                  0x0005b8                  _ConfigIO
+                  0x0005ca                  _reading_To_lux
+                  0x00061c                  _main
 
-.init.delay32     0x00064e         0x1c
- .init.delay32    0x00064e         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x00064e                  ___delay32
+.init.delay32     0x00064c         0x1c
+ .init.delay32    0x00064c         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x00064c                  ___delay32
 
-.dinit            0x00066a         0x10
- .dinit           0x00066a         0x10 data_init
+.dinit            0x000668         0x10
+ .dinit           0x000668         0x10 data_init
 
-.shared.dinit     0x00067a          0x2
- .shared.dinit    0x00067a          0x2 shared_data_init
+.shared.dinit     0x000678          0x2
+ .shared.dinit    0x000678          0x2 shared_data_init

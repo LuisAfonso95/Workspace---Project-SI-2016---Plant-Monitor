@@ -9,10 +9,10 @@
  * 
  * NTC luis:
  *  (14.95kohm)
- *   At 100ºC (283.15K), read 216 = 832.27ohm
- *  At 0ºC (271.15K)(not accurate), 25kohm (parece ser acima disso)
+ *   At 100ºC (283.15K) 883.17ohm (883ohm)
+ *  At 0ºC (271.15K), 26.139kohm (check resistor 1 value)
  * 
- * B = 3358 ohm
+ * B = 3469 ohm
  * 
  * Inputs: 
  *  - Pin 26 - Analog 9
@@ -28,46 +28,11 @@
 #include <libpic30.h>
 #include <stdint.h>
 
-#define _BETHA_ 3507
-#define _R0_ 26000
-#define _T0_ 273
+#include "UART_utils.h"
+#define _BETHA_ 3469
+#define _R0_ 26139
+#define _T0_ 273.15
 #define RDIVIDER 14950
-
-
-#define SYNC1 0XAB
-#define SYNC2 0X3C
-
-inline void ConfigCLK(void)
-{
-    //configurar oscilador para 32MHz
-    CLKDIVbits.DOZE = 0;    // 1:1
-    CLKDIVbits.RCDIV = 0;   // 8 MHz
-}
-
-inline void UART1Init(unsigned long int baud)
-{
-    U1BRG = (FCY / (16 * baud)) -1; // 19200 bps @ 16 MHz -> BRG = 51
-    U1MODE= 0x8000; // UARTEN
-    U1STA = 0x0400; // enable transmission
-}// UART1Init
-
-int putChar1( int c)
-{
-    while ( U1STAbits.UTXBF); // wait while Tx buffer full
-    U1TXREG = c;
-    return c;
-}// putChar1
-
-char getChar1( void)
-{
-    while ( !U1STAbits.URXDA); // wait
-    return U1RXREG; // read from the receive buffer
-}// getChar1
-
-int check_sum_values(unsigned int check_sum, unsigned int value){
-    check_sum = check_sum + value;
-    return check_sum;
-}
 
 
 inline void ConfigADC(void)
@@ -94,40 +59,6 @@ inline void ConfigADC(void)
     AD1CON1bits.ADON = 1; // Turn on A/D
 }
 
-int send_16bit_values(unsigned int values[], int size){
-  
-    int check_sum = 0;
-    
-    //check_sum +=number_of_ones(SYNC1);
-    check_sum_values(check_sum, SYNC1);
-    putChar1(SYNC1);
-    //check_sum +=number_of_ones(SYNC2);  
-    check_sum_values(check_sum, SYNC2);
-    putChar1(SYNC2);
-    
-    //command 0x12 (18) send 16bit values to MatLab
-    check_sum_values(check_sum, 0x12);
-    putChar1(0x12);
-  
-    //packet size (multiples of 2)
-    check_sum_values(check_sum, size*2);
-    putChar1(size*2);
-    
-    int i;
-    for(i = 0; i < size; i++){
-        //check_sum +=number_of_ones(c & 0xFF);
-        check_sum_values(check_sum, values[i] & 0xFF);
-        putChar1(values[i] & 0xFF);
-        //check_sum +=number_of_ones(c >> 8);
-        check_sum_values(check_sum, values[i] >> 8);
-        putChar1(values[i] >> 8); 
-    }
-
-    putChar1(check_sum);
-    
-  return 0;
-}
-
 unsigned int readADC(unsigned int ch)
 {
     AD1CHS = ch;            // Select analog input channel
@@ -146,19 +77,19 @@ inline void ConfigIO(void)
 
 inline float CalculoTemperatura(unsigned int Reading){
     
-    float R1,RT,R0,Vout,V,beta,T0,T,Temp;
-    T0 = _T0_;
-    V = 5;
-    beta = _BETHA_;
-    R1 = RDIVIDER;
-    R0 = _R0_;
-    Vout=(5.0*Reading)/4096.0;
-    RT=(R1*Vout)/(V-Vout);
-    T=(log(RT/R0)/beta)+(1/T0);
-    T=1/T;
-    Temp = T-273.15;
+    //float R1,RT,R0,Vout,V,beta,T0,T,Temp;
+    float T0 = _T0_;
+    float V = 5;
+    float beta = _BETHA_;
+    float R1 = RDIVIDER;
+    float R0 = _R0_;
+    float Vout =( 5.0 * Reading) / 4096.0;
+    float RT = ((float)R1 * Vout) / ((float)V - Vout);
+    float T = (log(RT / R0) / beta) + (1 / T0);
+    T= 1 / T;
+    //T = T-273.15;
     
-    return Temp;
+    return T;
 }
 
 int main(void) {
@@ -178,8 +109,10 @@ int main(void) {
         }
         Vadc=Vadc/16;
         Temp = (CalculoTemperatura(Vadc));
+        uint16_t send = Temp * 100.0;
+        send_16bit_values(&send, 1);
         //(&Temp, 1);
-        printf("%f\r\n",Temp);
+        //printf("%f\r\n",Temp);
     }
     
     

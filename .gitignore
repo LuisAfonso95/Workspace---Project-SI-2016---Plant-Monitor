@@ -2,10 +2,10 @@
 ## MPLAB
 #############
 
-build/
-debug/
-dist/
-nbproject/
+build\
+debug\
+dist\
+nbproject\
 
 #################
 ## Eclipse

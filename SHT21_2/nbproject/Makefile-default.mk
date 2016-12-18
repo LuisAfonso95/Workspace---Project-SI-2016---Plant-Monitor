@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=i2c_functions.c SHT21_2.c SHT21.c
+SOURCEFILES_QUOTED_IF_SPACED=i2c_functions.c SHT21_2.c UART_utils.c SHT21.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_functions.o ${OBJECTDIR}/SHT21_2.o ${OBJECTDIR}/SHT21.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_functions.o.d ${OBJECTDIR}/SHT21_2.o.d ${OBJECTDIR}/SHT21.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_functions.o ${OBJECTDIR}/SHT21_2.o ${OBJECTDIR}/UART_utils.o ${OBJECTDIR}/SHT21.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_functions.o.d ${OBJECTDIR}/SHT21_2.o.d ${OBJECTDIR}/UART_utils.o.d ${OBJECTDIR}/SHT21.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/i2c_functions.o ${OBJECTDIR}/SHT21_2.o ${OBJECTDIR}/SHT21.o
+OBJECTFILES=${OBJECTDIR}/i2c_functions.o ${OBJECTDIR}/SHT21_2.o ${OBJECTDIR}/UART_utils.o ${OBJECTDIR}/SHT21.o
 
 # Source Files
-SOURCEFILES=i2c_functions.c SHT21_2.c SHT21.c
+SOURCEFILES=i2c_functions.c SHT21_2.c UART_utils.c SHT21.c
 
 
 CFLAGS=
@@ -102,6 +102,13 @@ ${OBJECTDIR}/SHT21_2.o: SHT21_2.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  SHT21_2.c  -o ${OBJECTDIR}/SHT21_2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SHT21_2.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/SHT21_2.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/UART_utils.o: UART_utils.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/UART_utils.o.d 
+	@${RM} ${OBJECTDIR}/UART_utils.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_utils.c  -o ${OBJECTDIR}/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART_utils.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/SHT21.o: SHT21.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/SHT21.o.d 
@@ -123,6 +130,13 @@ ${OBJECTDIR}/SHT21_2.o: SHT21_2.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/SHT21_2.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  SHT21_2.c  -o ${OBJECTDIR}/SHT21_2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SHT21_2.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/SHT21_2.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/UART_utils.o: UART_utils.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/UART_utils.o.d 
+	@${RM} ${OBJECTDIR}/UART_utils.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_utils.c  -o ${OBJECTDIR}/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART_utils.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/SHT21.o: SHT21.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 

@@ -17,7 +17,7 @@ Command:
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/i2c_functions.o \
   build/default/production/SHT21_2.o \
-  build/default/production/SHT21.o \
+  build/default/production/UART_utils.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -52,7 +52,7 @@ f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
                               build/default/production/i2c_functions.o (___delay32)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                              build/default/production/SHT21_2.o (___udivsi3)
+                              build/default/production/UART_utils.o (___udivsi3)
 
 
 Selected CodeGuard Options:
@@ -84,13 +84,12 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xcc           0x132  (306)
-.const                       0x2cc                 0x2             0x3  (3)
-.text                        0x2ce               0x56a           0x81f  (2079)
-.init.delay32                0x838                0x1c            0x2a  (42)
-.dinit                       0x854                0x10            0x18  (24)
-.shared.dinit                0x864                 0x2             0x3  (3)
+.text                        0x2cc               0x2b2           0x40b  (1035)
+.init.delay32                0x57e                0x1c            0x2a  (42)
+.dinit                       0x59a                0x10            0x18  (24)
+.shared.dinit                0x5aa                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x999  (2457) 15%
+                 Total program memory used (bytes):          0x582  (1410) 8%
 
 
 Aivt Memory  [Origin = 0x104, Length = 0xfc]
@@ -137,75 +136,61 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __data_init
                   0x0002a8                  __DefaultInterrupt
                   0x0002ac                  ___udivsi3
-                  0x0002cc                  _POLYNOMIAL
-                  0x0002ce                  _SHT2x_CheckCrc
-                  0x000338                  _SHT21_Read_user_register
-                  0x000396                  _SHT21_Set_user_register
-                  0x000442                  _SHT21_Read_Temperature
-                  0x0004cc                  _SHT21_Read_Humidity
-                  0x000556                  _SHT21_init
-                  0x000586                  _ConfigCLK
-                  0x0005a0                  _UART1Init
-                  0x0005c8                  _getChar1
-                  0x0005dc                  _putChar1
-                  0x0005f6                  _check_sum_values
-                  0x000606                  _send_16bit_values
-                  0x00069a                  _main
-                  0x0006f4                  _I2CInit
-                  0x00070c                  _I2CStart
-                  0x000716                  _I2CStop
-                  0x000728                  _I2CRestart
-                  0x00073a                  _I2CAck
-                  0x00074e                  _I2CNak
-                  0x000762                  _I2CWait
-                  0x00077a                  _I2CSend
-                  0x000792                  _I2CRead
-                  0x0007aa                  _I2C_Timed_Read
-                  0x0007e4                  _I2C_Start_Read
-                  0x0007ec                  _I2C_Get_Read
-                  0x000800                  _I2C_Write
-                  0x000838                  ___delay32
+                  0x0002cc                  _I2CInit
+                  0x0002e4                  _I2CStart
+                  0x0002ee                  _I2CStop
+                  0x000300                  _I2CRestart
+                  0x000312                  _I2CAck
+                  0x000326                  _I2CNak
+                  0x00033a                  _I2CWait
+                  0x000352                  _I2CSend
+                  0x00036a                  _I2CRead
+                  0x000382                  _I2C_Timed_Read
+                  0x0003bc                  _I2C_Start_Read
+                  0x0003c4                  _I2C_Get_Read
+                  0x0003d8                  _I2C_Write
+                  0x000410                  _ConfigCLK
+                  0x00042a                  _UART1Init
+                  0x000452                  _putChar1
+                  0x00046c                  _getChar1
+                  0x000480                  _check_sum_values
+                  0x000490                  _send_16bit_values
+                  0x000524                  _main
+                  0x00057e                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000586                  _ConfigCLK
-                  0x00073a                  _I2CAck
-                  0x0006f4                  _I2CInit
-                  0x00074e                  _I2CNak
-                  0x000792                  _I2CRead
-                  0x000728                  _I2CRestart
-                  0x00077a                  _I2CSend
-                  0x00070c                  _I2CStart
-                  0x000716                  _I2CStop
-                  0x000762                  _I2CWait
-                  0x0007ec                  _I2C_Get_Read
-                  0x0007e4                  _I2C_Start_Read
-                  0x0007aa                  _I2C_Timed_Read
-                  0x000800                  _I2C_Write
-                  0x0002cc                  _POLYNOMIAL
-                  0x0004cc                  _SHT21_Read_Humidity
-                  0x000442                  _SHT21_Read_Temperature
-                  0x000338                  _SHT21_Read_user_register
-                  0x000396                  _SHT21_Set_user_register
-                  0x000556                  _SHT21_init
-                  0x0002ce                  _SHT2x_CheckCrc
-                  0x0005a0                  _UART1Init
+                  0x000410                  _ConfigCLK
+                  0x000312                  _I2CAck
+                  0x0002cc                  _I2CInit
+                  0x000326                  _I2CNak
+                  0x00036a                  _I2CRead
+                  0x000300                  _I2CRestart
+                  0x000352                  _I2CSend
+                  0x0002e4                  _I2CStart
+                  0x0002ee                  _I2CStop
+                  0x00033a                  _I2CWait
+                  0x0003c4                  _I2C_Get_Read
+                  0x0003bc                  _I2C_Start_Read
+                  0x000382                  _I2C_Timed_Read
+                  0x0003d8                  _I2C_Write
+                  0x00042a                  _UART1Init
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x000838                  ___delay32
+                  0x00057e                  ___delay32
                   0x0002ac                  ___udivsi3
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0005f6                  _check_sum_values
-                  0x0005c8                  _getChar1
-                  0x00069a                  _main
-                  0x0005dc                  _putChar1
-                  0x000606                  _send_16bit_values
+                  0x000480                  _check_sum_values
+                  0x00046c                  _getChar1
+                  0x000524                  _main
+                  0x000452                  _putChar1
+                  0x000490                  _send_16bit_values
 
 Memory Configuration
 
@@ -230,7 +215,7 @@ Linker script and memory map
 
 LOAD build/default/production/i2c_functions.o
 LOAD build/default/production/SHT21_2.o
-LOAD build/default/production/SHT21.o
+LOAD build/default/production/UART_utils.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
@@ -307,36 +292,35 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x163c
+.debug_info       0x000000       0x11b8
  *(.debug_info)
  .debug_info      0x000000        0x983 build/default/production/i2c_functions.o
- .debug_info      0x000983        0x71a build/default/production/SHT21_2.o
- .debug_info      0x00109d        0x59f build/default/production/SHT21.o
+ .debug_info      0x000983        0x21b build/default/production/SHT21_2.o
+ .debug_info      0x000b9e        0x61a build/default/production/UART_utils.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x43b
+.debug_abbrev     0x000000        0x329
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x152 build/default/production/i2c_functions.o
- .debug_abbrev    0x000152        0x189 build/default/production/SHT21_2.o
- .debug_abbrev    0x0002db        0x160 build/default/production/SHT21.o
+ .debug_abbrev    0x000152         0x93 build/default/production/SHT21_2.o
+ .debug_abbrev    0x0001e5        0x144 build/default/production/UART_utils.o
 
-.debug_line       0x000000        0x3bd
+.debug_line       0x000000        0x2ea
  *(.debug_line)
  .debug_line      0x000000        0x13b build/default/production/i2c_functions.o
- .debug_line      0x00013b        0x125 build/default/production/SHT21_2.o
- .debug_line      0x000260        0x15d build/default/production/SHT21.o
+ .debug_line      0x00013b         0xf2 build/default/production/SHT21_2.o
+ .debug_line      0x00022d         0xbd build/default/production/UART_utils.o
 
-.debug_frame      0x000000        0x314
+.debug_frame      0x000000        0x26c
  *(.debug_frame)
  .debug_frame     0x000000        0x180 build/default/production/i2c_functions.o
- .debug_frame     0x000180         0xd8 build/default/production/SHT21_2.o
- .debug_frame     0x000258         0xbc build/default/production/SHT21.o
+ .debug_frame     0x000180         0x30 build/default/production/SHT21_2.o
+ .debug_frame     0x0001b0         0xbc build/default/production/UART_utils.o
 
-.debug_str        0x000000         0x87
+.debug_str        0x000000         0x5e
  *(.debug_str)
  .debug_str       0x000000         0x3f build/default/production/i2c_functions.o
- .debug_str       0x00003f         0x26 build/default/production/SHT21_2.o
- .debug_str       0x000065         0x22 build/default/production/SHT21.o
+ .debug_str       0x00003f         0x1f build/default/production/UART_utils.o
 
 .debug_loc
  *(.debug_loc)
@@ -345,14 +329,14 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x20a
+                  0x000000        0x16d
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0xc5 build/default/production/i2c_functions.o
  .debug_pubnames
-                  0x0000c5         0x96 build/default/production/SHT21_2.o
+                  0x0000c5         0x35 build/default/production/SHT21_2.o
  .debug_pubnames
-                  0x00015b         0xaf build/default/production/SHT21.o
+                  0x0000fa         0x73 build/default/production/UART_utils.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -364,7 +348,7 @@ __FICD
  .debug_aranges
                   0x000018         0x18 build/default/production/SHT21_2.o
  .debug_aranges
-                  0x000030         0x18 build/default/production/SHT21.o
+                  0x000030         0x18 build/default/production/UART_utils.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1132,30 +1116,30 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000048        0x135
+                  0x000048        0x104
  .debug_pubtypes
                   0x000048         0xa0 build/default/production/i2c_functions.o
  .debug_pubtypes
-                  0x0000e8         0x52 build/default/production/SHT21_2.o
+                  0x0000e8         0x12 build/default/production/SHT21_2.o
  .debug_pubtypes
-                  0x00013a         0x43 build/default/production/SHT21.o
+                  0x0000fa         0x52 build/default/production/UART_utils.o
 
 __c30_signature
-                  0x00017d         0x2a
+                  0x00014c         0x2a
  __c30_signature
-                  0x00017d          0x6 build/default/production/i2c_functions.o
+                  0x00014c          0x6 build/default/production/i2c_functions.o
  __c30_signature
-                  0x000183          0x6 build/default/production/SHT21_2.o
+                  0x000152          0x6 build/default/production/SHT21_2.o
  __c30_signature
-                  0x000189          0x6 build/default/production/SHT21.o
+                  0x000158          0x6 build/default/production/UART_utils.o
  __c30_signature
-                  0x00018f          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00015e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000195          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000164          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x00019b          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x00016a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
  __c30_signature
-                  0x0001a1          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x000170          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
 
 .nbss               0x0800          0x4
  .nbss              0x0800          0x4 build/default/production/SHT21_2.o
@@ -1181,47 +1165,37 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/SHT21_2.o
 
-.const              0x82cc          0x2 load address 0x0002cc  
- .const             0x82cc          0x2 build/default/production/SHT21.o
-                    0x82cc                  _POLYNOMIAL
+.text             0x0002cc        0x2b2
+ .text            0x0002cc        0x144 build/default/production/i2c_functions.o
+                  0x0002cc                  _I2CInit
+                  0x0002e4                  _I2CStart
+                  0x0002ee                  _I2CStop
+                  0x000300                  _I2CRestart
+                  0x000312                  _I2CAck
+                  0x000326                  _I2CNak
+                  0x00033a                  _I2CWait
+                  0x000352                  _I2CSend
+                  0x00036a                  _I2CRead
+                  0x000382                  _I2C_Timed_Read
+                  0x0003bc                  _I2C_Start_Read
+                  0x0003c4                  _I2C_Get_Read
+                  0x0003d8                  _I2C_Write
+ .text            0x000410        0x114 build/default/production/UART_utils.o
+                  0x000410                  _ConfigCLK
+                  0x00042a                  _UART1Init
+                  0x000452                  _putChar1
+                  0x00046c                  _getChar1
+                  0x000480                  _check_sum_values
+                  0x000490                  _send_16bit_values
+ .text            0x000524         0x5a build/default/production/SHT21_2.o
+                  0x000524                  _main
 
-.text             0x0002ce        0x56a
- .text            0x0002ce        0x2b8 build/default/production/SHT21.o
-                  0x0002ce                  _SHT2x_CheckCrc
-                  0x000338                  _SHT21_Read_user_register
-                  0x000396                  _SHT21_Set_user_register
-                  0x000442                  _SHT21_Read_Temperature
-                  0x0004cc                  _SHT21_Read_Humidity
-                  0x000556                  _SHT21_init
- .text            0x000586        0x16e build/default/production/SHT21_2.o
-                  0x000586                  _ConfigCLK
-                  0x0005a0                  _UART1Init
-                  0x0005c8                  _getChar1
-                  0x0005dc                  _putChar1
-                  0x0005f6                  _check_sum_values
-                  0x000606                  _send_16bit_values
-                  0x00069a                  _main
- .text            0x0006f4        0x144 build/default/production/i2c_functions.o
-                  0x0006f4                  _I2CInit
-                  0x00070c                  _I2CStart
-                  0x000716                  _I2CStop
-                  0x000728                  _I2CRestart
-                  0x00073a                  _I2CAck
-                  0x00074e                  _I2CNak
-                  0x000762                  _I2CWait
-                  0x00077a                  _I2CSend
-                  0x000792                  _I2CRead
-                  0x0007aa                  _I2C_Timed_Read
-                  0x0007e4                  _I2C_Start_Read
-                  0x0007ec                  _I2C_Get_Read
-                  0x000800                  _I2C_Write
+.init.delay32     0x00057e         0x1c
+ .init.delay32    0x00057e         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x00057e                  ___delay32
 
-.init.delay32     0x000838         0x1c
- .init.delay32    0x000838         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x000838                  ___delay32
+.dinit            0x00059a         0x10
+ .dinit           0x00059a         0x10 data_init
 
-.dinit            0x000854         0x10
- .dinit           0x000854         0x10 data_init
-
-.shared.dinit     0x000864          0x2
- .shared.dinit    0x000864          0x2 shared_data_init
+.shared.dinit     0x0005aa          0x2
+ .shared.dinit    0x0005aa          0x2 shared_data_init
