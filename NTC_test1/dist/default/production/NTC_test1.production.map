@@ -16,7 +16,9 @@ Command:
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/NTC.o \
-  build/default/production/UART_utils.o \
+  build/default/production/_ext/1444887758/SHT21.o \
+  build/default/production/_ext/1444887758/UART_utils.o \
+  build/default/production/_ext/1444887758/i2c_functions.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -71,7 +73,7 @@ f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(logf.eo)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
                               build/default/production/NTC.o (___mulsf3)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                              build/default/production/UART_utils.o (___udivsi3)
+                              build/default/production/_ext/1444887758/UART_utils.o (___udivsi3)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
                               f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(logf.eo) (__frexpf)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(errno.eo)
@@ -117,18 +119,13 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x4da           0x747  (1863)
-.text                        0x6da               0x24a           0x36f  (879)
-.init.delay32                0x924                0x1c            0x2a  (42)
-.dinit                       0x940                0x10            0x18  (24)
-.shared.dinit                0x950                 0x2             0x3  (3)
+.const                       0x6da                 0x2             0x3  (3)
+.text                        0x6dc               0x6ce           0xa35  (2613)
+.init.delay32                0xdaa                0x1c            0x2a  (42)
+.dinit                       0xdc6                0x10            0x18  (24)
+.shared.dinit                0xdd6                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0xafb  (2811) 17%
-
-
-Ivt Memory  [Origin = 0x4, Length = 0xfc]
-
-section                    address   length (PC units)   length (bytes) (dec)
--------                    -------   -----------------   --------------------
+                 Total program memory used (bytes):         0x11c4  (4548) 28%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
@@ -181,39 +178,83 @@ External Symbols in Program Memory (by address):
                   0x00057a                  ___mulsf3
                   0x0005e2                  ___udivsi3
                   0x000602                  __frexpf
-                  0x00061c                  ___gesf2
                   0x00061c                  ___gtsf2
+                  0x00061c                  ___gesf2
                   0x000620                  ___floatsisf
                   0x000626                  ___floatundisf
                   0x000684                  __fcompare
                   0x0006ba                  ___floatdisf
-                  0x0006da                  _ConfigADC
-                  0x0006f2                  _readADC
-                  0x00070c                  _ConfigIO
-                  0x00071a                  _CalculoTemperatura
-                  0x0007ba                  _main
-                  0x000810                  _ConfigCLK
-                  0x00082a                  _UART1Init
-                  0x000852                  _putChar1
-                  0x00086c                  _getChar1
-                  0x000880                  _check_sum_values
-                  0x000890                  _send_16bit_values
-                  0x000924                  ___delay32
+                  0x0006da                  _POLYNOMIAL
+                  0x0006dc                  _SHT2x_CheckCrc
+                  0x000746                  _SHT21_Read_user_register
+                  0x0007a4                  _SHT21_Set_user_register
+                  0x000854                  _SHT21_Read_Temperature
+                  0x0008ea                  _SHT21_Read_Humidity
+                  0x000980                  _SHT21_init
+                  0x0009b0                  _SHT21_Convert_Temperature_10milli
+                  0x0009dc                  _SHT21_Convert_R_Humidity_10milli
+                  0x000a08                  _I2CInit
+                  0x000a24                  _I2CStart
+                  0x000a2e                  _I2CStop
+                  0x000a40                  _I2CRestart
+                  0x000a52                  _I2CAck
+                  0x000a66                  _I2CNak
+                  0x000a7a                  _I2CWait
+                  0x000a92                  _I2CSend
+                  0x000aaa                  _I2CRead
+                  0x000ac2                  _I2C_Timed_Read
+                  0x000b0c                  _I2C_Start_Read
+                  0x000b14                  _I2C_Get_Read
+                  0x000b28                  _I2C_Write
+                  0x000b60                  _ConfigADC
+                  0x000b78                  _readADC
+                  0x000b92                  _ConfigIO
+                  0x000ba0                  _CalculoTemperatura
+                  0x000c40                  _main
+                  0x000c96                  _ConfigCLK
+                  0x000cb0                  _UART1Init
+                  0x000cd8                  _putChar1
+                  0x000cf2                  _getChar1
+                  0x000d06                  _check_sum_values
+                  0x000d16                  _send_16bit_values
+                  0x000daa                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x00071a                  _CalculoTemperatura
-                  0x0006da                  _ConfigADC
-                  0x000810                  _ConfigCLK
-                  0x00070c                  _ConfigIO
-                  0x00082a                  _UART1Init
+                  0x000ba0                  _CalculoTemperatura
+                  0x000b60                  _ConfigADC
+                  0x000c96                  _ConfigCLK
+                  0x000b92                  _ConfigIO
+                  0x000a52                  _I2CAck
+                  0x000a08                  _I2CInit
+                  0x000a66                  _I2CNak
+                  0x000aaa                  _I2CRead
+                  0x000a40                  _I2CRestart
+                  0x000a92                  _I2CSend
+                  0x000a24                  _I2CStart
+                  0x000a2e                  _I2CStop
+                  0x000a7a                  _I2CWait
+                  0x000b14                  _I2C_Get_Read
+                  0x000b0c                  _I2C_Start_Read
+                  0x000ac2                  _I2C_Timed_Read
+                  0x000b28                  _I2C_Write
+                  0x0006da                  _POLYNOMIAL
+                  0x0009dc                  _SHT21_Convert_R_Humidity_10milli
+                  0x0009b0                  _SHT21_Convert_Temperature_10milli
+                  0x0008ea                  _SHT21_Read_Humidity
+                  0x000854                  _SHT21_Read_Temperature
+                  0x000746                  _SHT21_Read_user_register
+                  0x0007a4                  _SHT21_Set_user_register
+                  0x000980                  _SHT21_init
+                  0x0006dc                  _SHT2x_CheckCrc
+                  0x000cb0                  _UART1Init
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
                   0x0002ae                  ___addsf3
-                  0x000924                  ___delay32
+                  0x000daa                  ___delay32
                   0x000368                  ___divsf3
                   0x0003ec                  ___fixunssfsi
                   0x0006ba                  ___floatdisf
@@ -237,13 +278,13 @@ External Symbols in Program Memory (by name):
                   0x00049c                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000880                  _check_sum_values
-                  0x00086c                  _getChar1
+                  0x000d06                  _check_sum_values
+                  0x000cf2                  _getChar1
                   0x0004cc                  _logf
-                  0x0007ba                  _main
-                  0x000852                  _putChar1
-                  0x0006f2                  _readADC
-                  0x000890                  _send_16bit_values
+                  0x000c40                  _main
+                  0x000cd8                  _putChar1
+                  0x000b78                  _readADC
+                  0x000d16                  _send_16bit_values
 
 Memory Configuration
 
@@ -267,7 +308,9 @@ FICD             0xf8000e           0x000002
 Linker script and memory map
 
 LOAD build/default/production/NTC.o
-LOAD build/default/production/UART_utils.o
+LOAD build/default/production/_ext/1444887758/SHT21.o
+LOAD build/default/production/_ext/1444887758/UART_utils.o
+LOAD build/default/production/_ext/1444887758/i2c_functions.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
@@ -392,31 +435,41 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xe4b
+.debug_info       0x000000       0x1fec
  *(.debug_info)
  .debug_info      0x000000        0x82f build/default/production/NTC.o
- .debug_info      0x00082f        0x61c build/default/production/UART_utils.o
+ .debug_info      0x00082f        0x675 build/default/production/_ext/1444887758/SHT21.o
+ .debug_info      0x000ea4        0x62c build/default/production/_ext/1444887758/UART_utils.o
+ .debug_info      0x0014d0        0xb1c build/default/production/_ext/1444887758/i2c_functions.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x25a
+.debug_abbrev     0x000000        0x504
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x116 build/default/production/NTC.o
- .debug_abbrev    0x000116        0x144 build/default/production/UART_utils.o
+ .debug_abbrev    0x000116        0x16f build/default/production/_ext/1444887758/SHT21.o
+ .debug_abbrev    0x000285        0x144 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_abbrev    0x0003c9        0x13b build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_line       0x000000        0x218
+.debug_line       0x000000        0x4ee
  *(.debug_line)
  .debug_line      0x000000        0x15b build/default/production/NTC.o
- .debug_line      0x00015b         0xbd build/default/production/UART_utils.o
+ .debug_line      0x00015b        0x178 build/default/production/_ext/1444887758/SHT21.o
+ .debug_line      0x0002d3         0xcd build/default/production/_ext/1444887758/UART_utils.o
+ .debug_line      0x0003a0        0x14e build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_frame      0x000000        0x162
+.debug_frame      0x000000        0x3d6
  *(.debug_frame)
  .debug_frame     0x000000         0xa6 build/default/production/NTC.o
- .debug_frame     0x0000a6         0xbc build/default/production/UART_utils.o
+ .debug_frame     0x0000a6         0xf4 build/default/production/_ext/1444887758/SHT21.o
+ .debug_frame     0x00019a         0xbc build/default/production/_ext/1444887758/UART_utils.o
+ .debug_frame     0x000256        0x180 build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_str        0x000000         0x46
+.debug_str        0x000000         0xb6
  *(.debug_str)
  .debug_str       0x000000         0x27 build/default/production/NTC.o
- .debug_str       0x000027         0x1f build/default/production/UART_utils.o
+ .debug_str       0x000027         0x28 build/default/production/_ext/1444887758/SHT21.o
+ .debug_str       0x00004f         0x1f build/default/production/_ext/1444887758/UART_utils.o
+ .debug_str       0x00006e         0x48 build/default/production/_ext/1444887758/i2c_functions.o
 
 .debug_loc
  *(.debug_loc)
@@ -425,22 +478,30 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xdb
+                  0x000000        0x29a
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x68 build/default/production/NTC.o
  .debug_pubnames
-                  0x000068         0x73 build/default/production/UART_utils.o
+                  0x000068         0xfa build/default/production/_ext/1444887758/SHT21.o
+ .debug_pubnames
+                  0x000162         0x73 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_pubnames
+                  0x0001d5         0xc5 build/default/production/_ext/1444887758/i2c_functions.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x30
+.debug_aranges    0x000000         0x60
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/NTC.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/UART_utils.o
+                  0x000018         0x18 build/default/production/_ext/1444887758/SHT21.o
+ .debug_aranges
+                  0x000030         0x18 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_aranges
+                  0x000048         0x18 build/default/production/_ext/1444887758/i2c_functions.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1208,60 +1269,68 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000030         0xce
+                  0x000060        0x1e8
  .debug_pubtypes
-                  0x000030         0x7c build/default/production/NTC.o
+                  0x000060         0x7c build/default/production/NTC.o
  .debug_pubtypes
-                  0x0000ac         0x52 build/default/production/UART_utils.o
+                  0x0000dc         0x50 build/default/production/_ext/1444887758/SHT21.o
+ .debug_pubtypes
+                  0x00012c         0x52 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_pubtypes
+                  0x00017e         0xca build/default/production/_ext/1444887758/i2c_functions.o
 
 __c30_signature
-                  0x0000fe         0x8a
+                  0x000248         0x96
  __c30_signature
-                  0x0000fe          0x6 build/default/production/NTC.o
+                  0x000248          0x6 build/default/production/NTC.o
  __c30_signature
-                  0x000104          0x6 build/default/production/UART_utils.o
+                  0x00024e          0x6 build/default/production/_ext/1444887758/SHT21.o
  __c30_signature
-                  0x00010a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000254          0x6 build/default/production/_ext/1444887758/UART_utils.o
  __c30_signature
-                  0x000110          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x00025a          0x6 build/default/production/_ext/1444887758/i2c_functions.o
  __c30_signature
-                  0x000116          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000260          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00011c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x000266          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x000122          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x00026c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
  __c30_signature
-                  0x000128          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000272          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo)
  __c30_signature
-                  0x00012e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000278          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x000134          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x00027e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x00013a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000284          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x000140          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x00028a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000146          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000290          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x00014c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(logf.eo)
+                  0x000296          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x000152          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x00029c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x000158          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0002a2          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(logf.eo)
  __c30_signature
-                  0x00015e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
+                  0x0002a8          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x000164          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(errno.eo)
+                  0x0002ae          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
  __c30_signature
-                  0x00016a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                  0x0002b4          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
  __c30_signature
-                  0x000170          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x0002ba          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(errno.eo)
  __c30_signature
-                  0x000176          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x0002c0          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fgtge.eo)
  __c30_signature
-                  0x00017c          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x0002c6          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
  __c30_signature
-                  0x000182          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                  0x0002cc          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+ __c30_signature
+                  0x0002d2          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+ __c30_signature
+                  0x0002d8          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
 
 .ndata              0x0800          0x2
  .ndata             0x0800          0x2 build/default/production/NTC.o
@@ -1287,27 +1356,54 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/NTC.o
 
-.text             0x0006da        0x24a
- .text            0x0006da        0x136 build/default/production/NTC.o
-                  0x0006da                  _ConfigADC
-                  0x0006f2                  _readADC
-                  0x00070c                  _ConfigIO
-                  0x00071a                  _CalculoTemperatura
-                  0x0007ba                  _main
- .text            0x000810        0x114 build/default/production/UART_utils.o
-                  0x000810                  _ConfigCLK
-                  0x00082a                  _UART1Init
-                  0x000852                  _putChar1
-                  0x00086c                  _getChar1
-                  0x000880                  _check_sum_values
-                  0x000890                  _send_16bit_values
+.const              0x86da          0x2 load address 0x0006da  
+ .const             0x86da          0x2 build/default/production/_ext/1444887758/SHT21.o
+                    0x86da                  _POLYNOMIAL
 
-.init.delay32     0x000924         0x1c
- .init.delay32    0x000924         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x000924                  ___delay32
+.text             0x0006dc        0x6ce
+ .text            0x0006dc        0x32c build/default/production/_ext/1444887758/SHT21.o
+                  0x0006dc                  _SHT2x_CheckCrc
+                  0x000746                  _SHT21_Read_user_register
+                  0x0007a4                  _SHT21_Set_user_register
+                  0x000854                  _SHT21_Read_Temperature
+                  0x0008ea                  _SHT21_Read_Humidity
+                  0x000980                  _SHT21_init
+                  0x0009b0                  _SHT21_Convert_Temperature_10milli
+                  0x0009dc                  _SHT21_Convert_R_Humidity_10milli
+ .text            0x000a08        0x158 build/default/production/_ext/1444887758/i2c_functions.o
+                  0x000a08                  _I2CInit
+                  0x000a24                  _I2CStart
+                  0x000a2e                  _I2CStop
+                  0x000a40                  _I2CRestart
+                  0x000a52                  _I2CAck
+                  0x000a66                  _I2CNak
+                  0x000a7a                  _I2CWait
+                  0x000a92                  _I2CSend
+                  0x000aaa                  _I2CRead
+                  0x000ac2                  _I2C_Timed_Read
+                  0x000b0c                  _I2C_Start_Read
+                  0x000b14                  _I2C_Get_Read
+                  0x000b28                  _I2C_Write
+ .text            0x000b60        0x136 build/default/production/NTC.o
+                  0x000b60                  _ConfigADC
+                  0x000b78                  _readADC
+                  0x000b92                  _ConfigIO
+                  0x000ba0                  _CalculoTemperatura
+                  0x000c40                  _main
+ .text            0x000c96        0x114 build/default/production/_ext/1444887758/UART_utils.o
+                  0x000c96                  _ConfigCLK
+                  0x000cb0                  _UART1Init
+                  0x000cd8                  _putChar1
+                  0x000cf2                  _getChar1
+                  0x000d06                  _check_sum_values
+                  0x000d16                  _send_16bit_values
 
-.dinit            0x000940         0x10
- .dinit           0x000940         0x10 data_init
+.init.delay32     0x000daa         0x1c
+ .init.delay32    0x000daa         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000daa                  ___delay32
 
-.shared.dinit     0x000950          0x2
- .shared.dinit    0x000950          0x2 shared_data_init
+.dinit            0x000dc6         0x10
+ .dinit           0x000dc6         0x10 data_init
+
+.shared.dinit     0x000dd6          0x2
+ .shared.dinit    0x000dd6          0x2 shared_data_init

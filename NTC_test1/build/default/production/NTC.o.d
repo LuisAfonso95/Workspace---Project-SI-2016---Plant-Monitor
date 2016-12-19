@@ -1,4 +1,4 @@
 build/default/production/NTC.o:  \
 NTC.c  \
 config.h  \
-UART_utils.h 
+ ../Common_files/UART_utils.h 

@@ -44,7 +44,7 @@ void I2CWait();
 void I2CSend(unsigned char dat);
 uint8_t I2CRead(void);
 void I2C_Start_Read();
-uint8_t I2C_Timed_Read();
+uint8_t I2C_Timed_Read(uint32_t timeout);
 int I2C_Write(char addr, char value);
 
 #endif	/* XC_HEADER_TEMPLATE_H */

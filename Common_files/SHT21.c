@@ -1,6 +1,6 @@
 
 #include "SHT21.h"
-
+#define TIMEOUT 600000
 const unsigned int POLYNOMIAL = 0x131; 
 int SHT2x_CheckCrc(uint8_t data[], uint8_t nbrOfBytes, uint8_t checksum)
 //==============================================================================
@@ -51,7 +51,7 @@ int SHT21_Read_user_register(){
     if(SSP1CON2bits.ACKSTAT == 1){
         return -1;
     }    
-    int reg = I2C_Timed_Read();
+    int reg = I2C_Timed_Read(TIMEOUT);
     I2CNak();
     I2CStop();
     return reg;
@@ -80,7 +80,7 @@ int SHT21_Set_user_register(){
     if(SSP1CON2bits.ACKSTAT == 1){
         return -1;
     }    
-    uint8_t reg = I2C_Timed_Read();
+    uint8_t reg = I2C_Timed_Read(TIMEOUT);
     I2CNak();
     //I2CStop();
     
@@ -144,11 +144,11 @@ unsigned int SHT21_Read_Temperature(){
     //__delay_us(500);
     //while(SSP1STATbits.BF);
     uint8_t data[2];
-    data[0] = I2C_Timed_Read();
+    data[0] = I2C_Timed_Read(TIMEOUT);
     I2CAck();
-    data[1] = I2C_Timed_Read();
+    data[1] = I2C_Timed_Read(TIMEOUT);
     I2CAck();
-    uint8_t check_sum = I2C_Timed_Read();
+    uint8_t check_sum = I2C_Timed_Read(TIMEOUT);
     I2CNak();
     I2CStop();
     
@@ -185,11 +185,11 @@ unsigned int SHT21_Read_Humidity(){
     }
     //while(PORTBbits.RB8 == 0);
     uint8_t data[2];
-    data[0] = I2C_Timed_Read();
+    data[0] = I2C_Timed_Read(TIMEOUT);
     I2CAck();
-    data[1] = I2C_Timed_Read();
+    data[1] = I2C_Timed_Read(TIMEOUT);
     I2CAck();
-    uint8_t check_sum = I2C_Timed_Read();
+    uint8_t check_sum = I2C_Timed_Read(TIMEOUT);
     I2CNak();
     I2CStop();
     
@@ -214,4 +214,18 @@ int SHT21_init(void){
     }    
    I2CStop(); 
    //__delay_ms(15); 
+   
+   return 0;
 } 
+
+
+uint16_t SHT21_Convert_Temperature_10milli(uint16_t value){
+    uint16_t temperature;
+    temperature =   (-46.85 + (175.72 * value / 65536.0))*100;
+    return temperature;
+}
+uint16_t SHT21_Convert_R_Humidity_10milli(uint16_t value){
+    uint16_t r_humidity;
+    r_humidity =   (-6.0 + 125.0 * value /65536.0) * 100;
+    return r_humidity;
+}

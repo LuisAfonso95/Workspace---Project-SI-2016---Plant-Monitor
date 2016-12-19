@@ -16,7 +16,9 @@ Command:
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
   -Lf:/mcus_related/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/Moisture_sensor_test1.o \
-  build/default/production/UART_utils.o \
+  build/default/production/_ext/1444887758/SHT21.o \
+  build/default/production/_ext/1444887758/UART_utils.o \
+  build/default/production/_ext/1444887758/i2c_functions.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -50,8 +52,28 @@ f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_
                               f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o) (__data_init_standard)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
                               build/default/production/Moisture_sensor_test1.o (___delay32)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                              build/default/production/_ext/1444887758/SHT21.o (___subsf3)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                              build/default/production/_ext/1444887758/SHT21.o (___divsf3)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                              build/default/production/_ext/1444887758/SHT21.o (___fixunssfsi)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                              build/default/production/_ext/1444887758/SHT21.o (___floatunsisf)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                              f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo) (__fpack)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                              f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo) (__funpack)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                              f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo) (__funpack2)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                              f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo) (__fPropagateNaN)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                              build/default/production/_ext/1444887758/SHT21.o (___mulsf3)
 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                              build/default/production/UART_utils.o (___udivsi3)
+                              build/default/production/_ext/1444887758/UART_utils.o (___udivsi3)
+f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                              f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
 
 
 Selected CodeGuard Options:
@@ -82,19 +104,14 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200                0xcc           0x132  (306)
-.text                        0x2cc               0x186           0x249  (585)
-.init.delay32                0x452                0x1c            0x2a  (42)
-.dinit                       0x46e                0x10            0x18  (24)
-.shared.dinit                0x47e                 0x2             0x3  (3)
+.text                        0x200               0x3b2           0x58b  (1419)
+.const                       0x5b2                 0x2             0x3  (3)
+.text                        0x5b4               0x60a           0x90f  (2319)
+.init.delay32                0xbbe                0x1c            0x2a  (42)
+.dinit                       0xbda                0x10            0x18  (24)
+.shared.dinit                0xbea                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x3c0  (960) 5%
-
-
-Aivt Memory  [Origin = 0x104, Length = 0xfc]
-
-section                    address   length (PC units)   length (bytes) (dec)
--------                    -------   -----------------   --------------------
+                 Total program memory used (bytes):          0xee2  (3810) 23%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
@@ -134,42 +151,112 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __data_init_standard
                   0x00023c                  __data_init
                   0x0002a8                  __DefaultInterrupt
-                  0x0002ac                  ___udivsi3
-                  0x0002cc                  _ConfigCLK
-                  0x0002e6                  _UART1Init
-                  0x00030e                  _putChar1
-                  0x000328                  _getChar1
-                  0x00033c                  _check_sum_values
-                  0x00034c                  _send_16bit_values
-                  0x0003e0                  _ConfigADC
-                  0x0003f8                  _readADC
-                  0x000412                  _ConfigIO
-                  0x000422                  _main
-                  0x000452                  ___delay32
+                  0x0002ac                  ___subsf3
+                  0x0002ae                  ___addsf3
+                  0x000368                  ___divsf3
+                  0x0003ec                  ___fixunssfsi
+                  0x000422                  ___floatunsisf
+                  0x000426                  __fpack
+                  0x000472                  __funpack
+                  0x00049c                  __funpack2
+                  0x0004ac                  __fPropagateNaN
+                  0x0004be                  __fbopExit
+                  0x0004c6                  __fbopReturnNaN
+                  0x0004cc                  ___mulsf3
+                  0x000534                  ___udivsi3
+                  0x000554                  ___floatundisf
+                  0x0005b2                  _POLYNOMIAL
+                  0x0005b4                  _SHT2x_CheckCrc
+                  0x00061e                  _SHT21_Read_user_register
+                  0x00067c                  _SHT21_Set_user_register
+                  0x00072c                  _SHT21_Read_Temperature
+                  0x0007c2                  _SHT21_Read_Humidity
+                  0x000858                  _SHT21_init
+                  0x000888                  _SHT21_Convert_Temperature_10milli
+                  0x0008b4                  _SHT21_Convert_R_Humidity_10milli
+                  0x0008e0                  _I2CInit
+                  0x0008fc                  _I2CStart
+                  0x000906                  _I2CStop
+                  0x000918                  _I2CRestart
+                  0x00092a                  _I2CAck
+                  0x00093e                  _I2CNak
+                  0x000952                  _I2CWait
+                  0x00096a                  _I2CSend
+                  0x000982                  _I2CRead
+                  0x00099a                  _I2C_Timed_Read
+                  0x0009e4                  _I2C_Start_Read
+                  0x0009ec                  _I2C_Get_Read
+                  0x000a00                  _I2C_Write
+                  0x000a38                  _ConfigCLK
+                  0x000a52                  _UART1Init
+                  0x000a7a                  _putChar1
+                  0x000a94                  _getChar1
+                  0x000aa8                  _check_sum_values
+                  0x000ab8                  _send_16bit_values
+                  0x000b4c                  _ConfigADC
+                  0x000b64                  _readADC
+                  0x000b7e                  _ConfigIO
+                  0x000b8e                  _main
+                  0x000bbe                  ___delay32
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0003e0                  _ConfigADC
-                  0x0002cc                  _ConfigCLK
-                  0x000412                  _ConfigIO
-                  0x0002e6                  _UART1Init
+                  0x000b4c                  _ConfigADC
+                  0x000a38                  _ConfigCLK
+                  0x000b7e                  _ConfigIO
+                  0x00092a                  _I2CAck
+                  0x0008e0                  _I2CInit
+                  0x00093e                  _I2CNak
+                  0x000982                  _I2CRead
+                  0x000918                  _I2CRestart
+                  0x00096a                  _I2CSend
+                  0x0008fc                  _I2CStart
+                  0x000906                  _I2CStop
+                  0x000952                  _I2CWait
+                  0x0009ec                  _I2C_Get_Read
+                  0x0009e4                  _I2C_Start_Read
+                  0x00099a                  _I2C_Timed_Read
+                  0x000a00                  _I2C_Write
+                  0x0005b2                  _POLYNOMIAL
+                  0x0008b4                  _SHT21_Convert_R_Humidity_10milli
+                  0x000888                  _SHT21_Convert_Temperature_10milli
+                  0x0007c2                  _SHT21_Read_Humidity
+                  0x00072c                  _SHT21_Read_Temperature
+                  0x00061e                  _SHT21_Read_user_register
+                  0x00067c                  _SHT21_Set_user_register
+                  0x000858                  _SHT21_init
+                  0x0005b4                  _SHT2x_CheckCrc
+                  0x000a52                  _UART1Init
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x000452                  ___delay32
-                  0x0002ac                  ___udivsi3
+                  0x0002ae                  ___addsf3
+                  0x000bbe                  ___delay32
+                  0x000368                  ___divsf3
+                  0x0003ec                  ___fixunssfsi
+                  0x000554                  ___floatundisf
+                  0x000422                  ___floatunsisf
+                  0x0004cc                  ___mulsf3
+                  0x0002ac                  ___subsf3
+                  0x000534                  ___udivsi3
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
+                  0x0004ac                  __fPropagateNaN
+                  0x0004be                  __fbopExit
+                  0x0004c6                  __fbopReturnNaN
+                  0x000426                  __fpack
+                  0x000472                  __funpack
+                  0x00049c                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00033c                  _check_sum_values
-                  0x000328                  _getChar1
-                  0x000422                  _main
-                  0x00030e                  _putChar1
-                  0x0003f8                  _readADC
-                  0x00034c                  _send_16bit_values
+                  0x000aa8                  _check_sum_values
+                  0x000a94                  _getChar1
+                  0x000b8e                  _main
+                  0x000a7a                  _putChar1
+                  0x000b64                  _readADC
+                  0x000ab8                  _send_16bit_values
 
 Memory Configuration
 
@@ -193,7 +280,9 @@ FICD             0xf8000e           0x000002
 Linker script and memory map
 
 LOAD build/default/production/Moisture_sensor_test1.o
-LOAD build/default/production/UART_utils.o
+LOAD build/default/production/_ext/1444887758/SHT21.o
+LOAD build/default/production/_ext/1444887758/UART_utils.o
+LOAD build/default/production/_ext/1444887758/i2c_functions.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
@@ -218,7 +307,7 @@ LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200         0xcc
+.text             0x000200        0x3b2
  *(.init)
  .init            0x000200         0x3c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -236,8 +325,40 @@ LOAD f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
  *(.libm)
  *(.libdsp)
  *(.lib*)
- .libm.udivsi3    0x0002ac         0x20 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                  0x0002ac                  ___udivsi3
+ .libm.subsf3     0x0002ac         0xbc f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x0002ac                  ___subsf3
+                  0x0002ae                  ___addsf3
+ .libm.divfs3     0x000368         0x84 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x000368                  ___divsf3
+ .libm.fixunssfsi
+                  0x0003ec         0x36 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x0003ec                  ___fixunssfsi
+ .libm.floatunsisf
+                  0x000422          0x4 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000422                  ___floatunsisf
+ .libm.fpack      0x000426         0x4c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x000426                  __fpack
+ .libm.funpack    0x000472         0x2a f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000472                  __funpack
+ .libm.funpack2
+                  0x00049c         0x10 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x00049c                  __funpack2
+ .libm.fPropagateNaN
+                  0x0004ac         0x12 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004ac                  __fPropagateNaN
+ .libm.fbobExit
+                  0x0004be          0x8 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004be                  __fbopExit
+ .libm.fbopReturnNaN
+                  0x0004c6          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004c6                  __fbopReturnNaN
+ .libm.mulsf3     0x0004cc         0x68 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x0004cc                  ___mulsf3
+ .libm.udivsi3    0x000534         0x20 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x000534                  ___udivsi3
+ .libm.floatundisf
+                  0x000554         0x5e f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000554                  ___floatundisf
 
 usercode
  *(usercode)
@@ -270,31 +391,41 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x11f6
+.debug_info       0x000000       0x23af
  *(.debug_info)
  .debug_info      0x000000        0xbce build/default/production/Moisture_sensor_test1.o
- .debug_info      0x000bce        0x628 build/default/production/UART_utils.o
+ .debug_info      0x000bce        0x681 build/default/production/_ext/1444887758/SHT21.o
+ .debug_info      0x00124f        0x638 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_info      0x001887        0xb28 build/default/production/_ext/1444887758/i2c_functions.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x26f
+.debug_abbrev     0x000000        0x519
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x12b build/default/production/Moisture_sensor_test1.o
- .debug_abbrev    0x00012b        0x144 build/default/production/UART_utils.o
+ .debug_abbrev    0x00012b        0x16f build/default/production/_ext/1444887758/SHT21.o
+ .debug_abbrev    0x00029a        0x144 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_abbrev    0x0003de        0x13b build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_line       0x000000        0x1cc
+.debug_line       0x000000        0x4a2
  *(.debug_line)
  .debug_line      0x000000        0x10f build/default/production/Moisture_sensor_test1.o
- .debug_line      0x00010f         0xbd build/default/production/UART_utils.o
+ .debug_line      0x00010f        0x178 build/default/production/_ext/1444887758/SHT21.o
+ .debug_line      0x000287         0xcd build/default/production/_ext/1444887758/UART_utils.o
+ .debug_line      0x000354        0x14e build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_frame      0x000000        0x140
+.debug_frame      0x000000        0x3b4
  *(.debug_frame)
  .debug_frame     0x000000         0x84 build/default/production/Moisture_sensor_test1.o
- .debug_frame     0x000084         0xbc build/default/production/UART_utils.o
+ .debug_frame     0x000084         0xf4 build/default/production/_ext/1444887758/SHT21.o
+ .debug_frame     0x000178         0xbc build/default/production/_ext/1444887758/UART_utils.o
+ .debug_frame     0x000234        0x180 build/default/production/_ext/1444887758/i2c_functions.o
 
-.debug_str        0x000000         0x63
+.debug_str        0x000000         0xd3
  *(.debug_str)
  .debug_str       0x000000         0x44 build/default/production/Moisture_sensor_test1.o
- .debug_str       0x000044         0x1f build/default/production/UART_utils.o
+ .debug_str       0x000044         0x28 build/default/production/_ext/1444887758/SHT21.o
+ .debug_str       0x00006c         0x1f build/default/production/_ext/1444887758/UART_utils.o
+ .debug_str       0x00008b         0x48 build/default/production/_ext/1444887758/i2c_functions.o
 
 .debug_loc
  *(.debug_loc)
@@ -303,22 +434,30 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xcf
+                  0x000000        0x28e
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x5c build/default/production/Moisture_sensor_test1.o
  .debug_pubnames
-                  0x00005c         0x73 build/default/production/UART_utils.o
+                  0x00005c         0xfa build/default/production/_ext/1444887758/SHT21.o
+ .debug_pubnames
+                  0x000156         0x73 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_pubnames
+                  0x0001c9         0xc5 build/default/production/_ext/1444887758/i2c_functions.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x30
+.debug_aranges    0x000000         0x60
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/Moisture_sensor_test1.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/UART_utils.o
+                  0x000018         0x18 build/default/production/_ext/1444887758/SHT21.o
+ .debug_aranges
+                  0x000030         0x18 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_aranges
+                  0x000048         0x18 build/default/production/_ext/1444887758/i2c_functions.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1086,26 +1225,54 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000030        0x11c
+                  0x000060        0x236
  .debug_pubtypes
-                  0x000030         0xca build/default/production/Moisture_sensor_test1.o
+                  0x000060         0xca build/default/production/Moisture_sensor_test1.o
  .debug_pubtypes
-                  0x0000fa         0x52 build/default/production/UART_utils.o
+                  0x00012a         0x50 build/default/production/_ext/1444887758/SHT21.o
+ .debug_pubtypes
+                  0x00017a         0x52 build/default/production/_ext/1444887758/UART_utils.o
+ .debug_pubtypes
+                  0x0001cc         0xca build/default/production/_ext/1444887758/i2c_functions.o
 
 __c30_signature
-                  0x00014c         0x24
+                  0x000296         0x6c
  __c30_signature
-                  0x00014c          0x6 build/default/production/Moisture_sensor_test1.o
+                  0x000296          0x6 build/default/production/Moisture_sensor_test1.o
  __c30_signature
-                  0x000152          0x6 build/default/production/UART_utils.o
+                  0x00029c          0x6 build/default/production/_ext/1444887758/SHT21.o
  __c30_signature
-                  0x000158          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x0002a2          0x6 build/default/production/_ext/1444887758/UART_utils.o
  __c30_signature
-                  0x00015e          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x0002a8          0x6 build/default/production/_ext/1444887758/i2c_functions.o
  __c30_signature
-                  0x000164          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x0002ae          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00016a          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0002b4          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+ __c30_signature
+                  0x0002ba          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+ __c30_signature
+                  0x0002c0          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+ __c30_signature
+                  0x0002c6          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+ __c30_signature
+                  0x0002cc          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+ __c30_signature
+                  0x0002d2          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+ __c30_signature
+                  0x0002d8          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+ __c30_signature
+                  0x0002de          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+ __c30_signature
+                  0x0002e4          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+ __c30_signature
+                  0x0002ea          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+ __c30_signature
+                  0x0002f0          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+ __c30_signature
+                  0x0002f6          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+ __c30_signature
+                  0x0002fc          0x6 f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
 
 .ndata              0x0800          0x2
  .ndata             0x0800          0x2 build/default/production/Moisture_sensor_test1.o
@@ -1131,26 +1298,53 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/Moisture_sensor_test1.o
 
-.text             0x0002cc        0x186
- .text            0x0002cc        0x114 build/default/production/UART_utils.o
-                  0x0002cc                  _ConfigCLK
-                  0x0002e6                  _UART1Init
-                  0x00030e                  _putChar1
-                  0x000328                  _getChar1
-                  0x00033c                  _check_sum_values
-                  0x00034c                  _send_16bit_values
- .text            0x0003e0         0x72 build/default/production/Moisture_sensor_test1.o
-                  0x0003e0                  _ConfigADC
-                  0x0003f8                  _readADC
-                  0x000412                  _ConfigIO
-                  0x000422                  _main
+.const              0x85b2          0x2 load address 0x0005b2  
+ .const             0x85b2          0x2 build/default/production/_ext/1444887758/SHT21.o
+                    0x85b2                  _POLYNOMIAL
 
-.init.delay32     0x000452         0x1c
- .init.delay32    0x000452         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x000452                  ___delay32
+.text             0x0005b4        0x60a
+ .text            0x0005b4        0x32c build/default/production/_ext/1444887758/SHT21.o
+                  0x0005b4                  _SHT2x_CheckCrc
+                  0x00061e                  _SHT21_Read_user_register
+                  0x00067c                  _SHT21_Set_user_register
+                  0x00072c                  _SHT21_Read_Temperature
+                  0x0007c2                  _SHT21_Read_Humidity
+                  0x000858                  _SHT21_init
+                  0x000888                  _SHT21_Convert_Temperature_10milli
+                  0x0008b4                  _SHT21_Convert_R_Humidity_10milli
+ .text            0x0008e0        0x158 build/default/production/_ext/1444887758/i2c_functions.o
+                  0x0008e0                  _I2CInit
+                  0x0008fc                  _I2CStart
+                  0x000906                  _I2CStop
+                  0x000918                  _I2CRestart
+                  0x00092a                  _I2CAck
+                  0x00093e                  _I2CNak
+                  0x000952                  _I2CWait
+                  0x00096a                  _I2CSend
+                  0x000982                  _I2CRead
+                  0x00099a                  _I2C_Timed_Read
+                  0x0009e4                  _I2C_Start_Read
+                  0x0009ec                  _I2C_Get_Read
+                  0x000a00                  _I2C_Write
+ .text            0x000a38        0x114 build/default/production/_ext/1444887758/UART_utils.o
+                  0x000a38                  _ConfigCLK
+                  0x000a52                  _UART1Init
+                  0x000a7a                  _putChar1
+                  0x000a94                  _getChar1
+                  0x000aa8                  _check_sum_values
+                  0x000ab8                  _send_16bit_values
+ .text            0x000b4c         0x72 build/default/production/Moisture_sensor_test1.o
+                  0x000b4c                  _ConfigADC
+                  0x000b64                  _readADC
+                  0x000b7e                  _ConfigIO
+                  0x000b8e                  _main
 
-.dinit            0x00046e         0x10
- .dinit           0x00046e         0x10 data_init
+.init.delay32     0x000bbe         0x1c
+ .init.delay32    0x000bbe         0x1c f:/mcus_related/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000bbe                  ___delay32
 
-.shared.dinit     0x00047e          0x2
- .shared.dinit    0x00047e          0x2 shared_data_init
+.dinit            0x000bda         0x10
+ .dinit           0x000bda         0x10 data_init
+
+.shared.dinit     0x000bea          0x2
+ .shared.dinit    0x000bea          0x2 shared_data_init

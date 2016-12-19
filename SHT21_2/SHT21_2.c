@@ -45,6 +45,9 @@ int main(void) {
            values[1] = last_values[1];
        else
            last_values[1] = values[1];
+       
+       values[0] = SHT21_Convert_R_Humidity_10milli(values[0]);
+       values[1] = SHT21_Convert_Temperature_10milli(values[1]);
         send_16bit_values(values, 2);
         __delay_ms(1000);
     }

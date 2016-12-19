@@ -8,6 +8,8 @@ Description: Initialize I2C in master mode, Sets the required baudrate
 */
 void I2CInit(void)
 {
+    ANSBbits.ANSB8 = 0;
+    ANSBbits.ANSB9 = 0;
 	TRISBbits.TRISB9 = 1;      /* SDA and SCL as input pin */
 	TRISBbits.TRISB8 = 1;      /* these pins can be configured either i/p or o/p */
 	SSP1STAT = 0b11000000; /* Slew rate disabled */
@@ -132,14 +134,14 @@ uint8_t I2CRead(void)
 }
 
 
-uint8_t I2C_Timed_Read(){
+uint8_t I2C_Timed_Read(uint32_t timeout){
     SSP1CON2bits.RCEN = 1; 
     volatile uint16_t k =0;
-    while(!SSP1STATbits.BF && k < 60000){
+    while(!SSP1STATbits.BF && k < timeout){
         k++;
         __delay_us(1);
     } 
-    if(k >= 60000){
+    if(k >= timeout){
         return -1;
     }
     else{

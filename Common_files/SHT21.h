@@ -15,6 +15,7 @@ int SHT21_Set_user_register();
 unsigned int SHT21_Read_Temperature();
 unsigned int SHT21_Read_Humidity();
 int SHT21_init(void);
+uint16_t SHT21_Convert_Temperature_10milli(uint16_t value);
+uint16_t SHT21_Convert_R_Humidity_10milli(uint16_t value);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
-
