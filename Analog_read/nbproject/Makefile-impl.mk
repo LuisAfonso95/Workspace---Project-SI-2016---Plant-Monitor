@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Analog_read.X
+PROJECTNAME=Analog_read
 
 # Active Configuration
 DEFAULTCONF=default

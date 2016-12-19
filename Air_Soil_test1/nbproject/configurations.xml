@@ -6,6 +6,8 @@
       <itemPath>../Common_files/SHT21.h</itemPath>
       <itemPath>../Common_files/UART_utils.c</itemPath>
       <itemPath>../Common_files/UART_utils.h</itemPath>
+      <itemPath>../Common_files/i2c_functions.c</itemPath>
+      <itemPath>../Common_files/i2c_functions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"

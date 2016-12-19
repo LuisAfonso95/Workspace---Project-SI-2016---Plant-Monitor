@@ -51,6 +51,9 @@ inline void ConfigIO(void)
 {
     ANSB = ~0x0484;         // RX1, TX1, RB10 digitais, restantes analogicos;
     TRISB= 0b1111111101111111;
+    
+    ANSAbits.ANSA4 = 1;   
+    TRISAbits.TRISA4 = 1; 
 }
 
 unsigned int values[1];
@@ -64,7 +67,7 @@ int main(void) {
     ConfigADC();
     
 	while(1){
-        values[0] = readADC(9);     // Adquire canal 9
+        values[0] = readADC(16);     // Adquire canal 9
 
         send_16bit_values(values, 1);
         __delay_ms(500); 

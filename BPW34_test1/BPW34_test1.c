@@ -81,7 +81,7 @@ int main(void) {
     ConfigADC();
     
 	while(1){
-        uint16_t temp = readADC(16);     // Adquire canal 9
+        uint16_t temp = readADC(16);    
         values[0] = reading_To_lux(temp, 750000, FEEDBACK_RESISTOR);
 
         send_16bit_values(values, 1);

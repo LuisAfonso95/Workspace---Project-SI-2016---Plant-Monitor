@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Air_Soil_test1.c ../Common_files/SHT21.c ../Common_files/UART_utils.c
+SOURCEFILES_QUOTED_IF_SPACED=../Common_files/SHT21.c ../Common_files/UART_utils.c ../Common_files/i2c_functions.c Air_Soil_test1.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Air_Soil_test1.o ${OBJECTDIR}/_ext/1444887758/SHT21.o ${OBJECTDIR}/_ext/1444887758/UART_utils.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Air_Soil_test1.o.d ${OBJECTDIR}/_ext/1444887758/SHT21.o.d ${OBJECTDIR}/_ext/1444887758/UART_utils.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1444887758/SHT21.o ${OBJECTDIR}/_ext/1444887758/UART_utils.o ${OBJECTDIR}/_ext/1444887758/i2c_functions.o ${OBJECTDIR}/Air_Soil_test1.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1444887758/SHT21.o.d ${OBJECTDIR}/_ext/1444887758/UART_utils.o.d ${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d ${OBJECTDIR}/Air_Soil_test1.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Air_Soil_test1.o ${OBJECTDIR}/_ext/1444887758/SHT21.o ${OBJECTDIR}/_ext/1444887758/UART_utils.o
+OBJECTFILES=${OBJECTDIR}/_ext/1444887758/SHT21.o ${OBJECTDIR}/_ext/1444887758/UART_utils.o ${OBJECTDIR}/_ext/1444887758/i2c_functions.o ${OBJECTDIR}/Air_Soil_test1.o
 
 # Source Files
-SOURCEFILES=Air_Soil_test1.c ../Common_files/SHT21.c ../Common_files/UART_utils.c
+SOURCEFILES=../Common_files/SHT21.c ../Common_files/UART_utils.c ../Common_files/i2c_functions.c Air_Soil_test1.c
 
 
 CFLAGS=
@@ -88,13 +88,6 @@ MP_LINKER_FILE_OPTION=,--script=p24FV16KM202.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/Air_Soil_test1.o: Air_Soil_test1.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Air_Soil_test1.o.d 
-	@${RM} ${OBJECTDIR}/Air_Soil_test1.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Air_Soil_test1.c  -o ${OBJECTDIR}/Air_Soil_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Air_Soil_test1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/Air_Soil_test1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/_ext/1444887758/SHT21.o: ../Common_files/SHT21.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1444887758" 
 	@${RM} ${OBJECTDIR}/_ext/1444887758/SHT21.o.d 
@@ -109,14 +102,21 @@ ${OBJECTDIR}/_ext/1444887758/UART_utils.o: ../Common_files/UART_utils.c  nbproje
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Common_files/UART_utils.c  -o ${OBJECTDIR}/_ext/1444887758/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1444887758/UART_utils.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1444887758/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-else
+${OBJECTDIR}/_ext/1444887758/i2c_functions.o: ../Common_files/i2c_functions.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1444887758" 
+	@${RM} ${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1444887758/i2c_functions.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Common_files/i2c_functions.c  -o ${OBJECTDIR}/_ext/1444887758/i2c_functions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/Air_Soil_test1.o: Air_Soil_test1.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Air_Soil_test1.o.d 
 	@${RM} ${OBJECTDIR}/Air_Soil_test1.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Air_Soil_test1.c  -o ${OBJECTDIR}/Air_Soil_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Air_Soil_test1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Air_Soil_test1.c  -o ${OBJECTDIR}/Air_Soil_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Air_Soil_test1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Air_Soil_test1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+else
 ${OBJECTDIR}/_ext/1444887758/SHT21.o: ../Common_files/SHT21.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1444887758" 
 	@${RM} ${OBJECTDIR}/_ext/1444887758/SHT21.o.d 
@@ -130,6 +130,20 @@ ${OBJECTDIR}/_ext/1444887758/UART_utils.o: ../Common_files/UART_utils.c  nbproje
 	@${RM} ${OBJECTDIR}/_ext/1444887758/UART_utils.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Common_files/UART_utils.c  -o ${OBJECTDIR}/_ext/1444887758/UART_utils.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1444887758/UART_utils.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1444887758/UART_utils.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1444887758/i2c_functions.o: ../Common_files/i2c_functions.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1444887758" 
+	@${RM} ${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1444887758/i2c_functions.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Common_files/i2c_functions.c  -o ${OBJECTDIR}/_ext/1444887758/i2c_functions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1444887758/i2c_functions.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/Air_Soil_test1.o: Air_Soil_test1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Air_Soil_test1.o.d 
+	@${RM} ${OBJECTDIR}/Air_Soil_test1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Air_Soil_test1.c  -o ${OBJECTDIR}/Air_Soil_test1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Air_Soil_test1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"../Common_files" -O0 -I"../Common_files" -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Air_Soil_test1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

@@ -20,10 +20,10 @@ fopen(s);
 
 
 %set the maximum for the values 
-y_max = 4096;
+y_max = 50000;
 
 
-points = 20000; %number of points on the graph at all times
+points = 500; %number of points on the graph at all times
 data_period = 96; %data period in milliseconds 
 %x will be the time axis. The time between points is defined by
 %"data_period"
@@ -42,7 +42,7 @@ figure
 % edit the graph later. You can use "plot" instead of "area", I just liked
 % the aspect better.
 lh1 = area(x,y1, 'FaceColor', [.5 .5 .5]);
-str = sprintf('0 to %d\%', y_max),
+str = sprintf('0 to %d', y_max),
 title(str);
 axis([-points*data_period, 0, 0, y_max]);
 line([-points*data_period, 0] , [ 2048 2048]);
@@ -105,7 +105,7 @@ function [command, size, values] = get_1_packet(s)
                     state = state + 1;
                     check_sum_values(check_sum, read);
                     %check_sum = check_sum + number_of_ones(read);
-                elif state == 1
+                elseif state == 1
                     if read == 60
                         state = state + 1;
                         check_sum_values(check_sum, read);
@@ -114,15 +114,15 @@ function [command, size, values] = get_1_packet(s)
                         state = 0;
                         check_sum = 0;
                     end
-                elif state == 2
+                elseif state == 2
                     command = read;
                     check_sum_values(check_sum, read);
                     state = state + 1;
-                elif state == 3
+                elseif state == 3
                     size = read;
                     check_sum_values(check_sum, read);
                     state = state + 1;
-                elif state == 4
+                elseif state == 4
                     if counter < size
                         values(counter) = read;
                         check_sum_values(check_sum, read);
@@ -132,7 +132,7 @@ function [command, size, values] = get_1_packet(s)
                         check_sum_values(check_sum, read);
                         state = state + 1;
                     end
-                elif state == 5
+                elseif state == 5
                         %check_sum
                         %read
                     if check_sum == read
@@ -158,4 +158,3 @@ function check_sum = check_sum_values(check_sum, values)
         check_sum = check_sum - (65536*n);
     end
 end
-
