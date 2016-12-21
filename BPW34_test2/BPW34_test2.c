@@ -53,32 +53,79 @@ inline void ConfigIO(void)
     ANSB = ~0x0084;         // RX1, TX1 to not analog
     TRISBbits.TRISB2 = 1;
     TRISBbits.TRISB7 = 0;
-    
+       
+    //Light meter pin
     ANSAbits.ANSA4 = 1;   
     TRISAbits.TRISA4 = 1; 
-    
     //ANSAbits. = 0;   
     TRISAbits.TRISA7 = 0; 
+}
+
+uint16_t Get_ADC_Average(uint16_t ch, uint16_t samples){
+    
+    uint16_t cycles = samples % 16;
+    if( cycles == 0){
+        cycles = 1;
+    }
+    uint16_t values[cycles];
+    
+    int i, k;
+    for(i = 0; i < cycles; i++){
+        values[i] = 0;
+        for(k = 0; k < 16 && samples > 0; k++){
+            values[i] +=  readADC(ch);
+            samples--;
+        }
+        values[i] = values[i] / k;   
+    }
+    
+    for(i = 1; i < cycles; i++){
+        values[0] += values[i];
+    }
+    
+    if(cycles != 0)
+        values[0] = values[0] / cycles;
+    
+    return values[0];
 }
 
 #define LUX_B 13.33
 #define FEEDBACK_RESISTOR1 184600
 #define FEEDBACK_RESISTOR2 672
-#define OFFSET_REFERENCE 750000
-#define MAX_MVOLTAGE 3600
-#define MAX_READING 3480
-#define MIN_READING 630
-uint16_t reading_To_lux(uint16_t ADC_reading, uint32_t uV_Offset, uint32_t RF){
+#define OFFSET_REFERENCE 531
+#define MAX_READING 3564
+uint32_t Rf = FEEDBACK_RESISTOR1;
+uint16_t reading_To_lux(uint16_t ADC_reading, uint32_t Offset, uint32_t RF){
     
-    
+    if(ADC_reading < Offset)
+        ADC_reading = 0;
+    else
+        ADC_reading = ADC_reading - Offset;
     //to current:
-    float uvoltage = (uint32_t)5000000/(uint32_t)4096*(uint32_t)ADC_reading;
-    float ucurrent = (uvoltage-uV_Offset) / RF;
+    float uvoltage = (uint32_t)5000000/(uint32_t)4095*(uint32_t)(ADC_reading);
+    float ucurrent = (uvoltage) / RF;
     float lux = LUX_B * ucurrent;
     
-    uint32_t value = lux;
+    uint16_t value = lux;
     return value;
 }
+
+uint16_t Get_Fotodiode_Lux(){
+    Rf = FEEDBACK_RESISTOR1;
+    PORTAbits.RA7 = 0;
+    __delay_ms(20); 
+    uint16_t temp = Get_ADC_Average(16, 16);
+    if(temp > MAX_READING){
+        PORTAbits.RA7 = 1;
+        Rf = FEEDBACK_RESISTOR2;
+        __delay_ms(20); 
+        temp = Get_ADC_Average(16, 16);
+    }
+
+    temp = reading_To_lux(temp, OFFSET_REFERENCE, Rf);
+    return temp;
+}
+
 unsigned int values[1];
 int main(void) {
     
@@ -91,11 +138,9 @@ int main(void) {
     
     PORTAbits.RA7 = 0;
    
-    uint32_t Rf = FEEDBACK_RESISTOR1;
 	while(1){
       
-
-        values[0] = (uint16_t)reading_To_lux(temp, OFFSET_REFERENCE, Rf);
+        values[0] = Get_Fotodiode_Lux();
 
         send_16bit_values(values, 1);
         __delay_ms(100); 

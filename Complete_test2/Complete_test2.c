@@ -1,17 +1,26 @@
 /*
  * 
  * 
- * NTC luis:
- *  (R1 = 14.95kohm)
- *   At 100ºC (283.15K) 883.17ohm (883ohm)
- *  At 0ºC (271.15K), 26.139kohm (check resistor 1 value)
+ * Measurements period: 60s
+ * Timer tick period: 1ms
  * 
- * B = 3469 ohm
+ * After measurement it sends data right away
+ * No handshake messages - just send and hope it's received
+ * 
+ *  ==================================
+ *  Pins:
+ *  - Pin 17 - SCL1 - RB8
+ *  - Pin 18 - SDA1 - RB9
  * 
  * Inputs: 
- *  - Pin 26 - Analog 9 - soil temperature
- *  - Pin 25 - Analog 10 - soil moisture
+ *  - Pin 26 - Analog 9 - RB15 - soil temperature
+ *  - Pin 25 - Analog 10 - RB14 - soil moisture
+ *  - Pin 12 - Analog 16 - RA4 - Light meter 
  * 
+ * Outputs:
+ *  - Pin 19 - RA7 - Multiplexer select bits for Light meter
+ * 
+ * ==========================================================
  */
 
 
@@ -26,9 +35,9 @@
 #include "SHT21.h"
 #include "UART_utils.h"
 
-#define _BETHA_ 3469
-#define _R0_ 26139
-#define _T0_ 273.15
+#define _BETHA_ 3435
+#define _R0_ 10000
+#define _T0_ 298.15
 #define RDIVIDER 14950
 
 uint32_t millis = 0;
@@ -36,12 +45,18 @@ uint32_t millis = 0;
 uint8_t Send_stuff_F = 0;
 uint8_t Make_measurements_F = 0;
 
+/*
+ * Timer init
+ * 
+ * Configs timer and interrupt
+ * 
+ */
 void Timer_Init(){
     IPC0bits.T1IP = 1;
 
 	T1CON = 0x00;
 	TMR1 = 0x00;
-	PR1 = 16000;
+	PR1 = 16000; // with no prescaler and 16Mhz clock = 1ms period
 	T1CON =  0x8000; //starts timer,  prescaler 1:1, Internal clock ,
 
 	IFS0bits.T1IF = 0;
@@ -50,6 +65,7 @@ void Timer_Init(){
 	T1CONbits.TON = 1;
     
 }
+// Delays a number of periods (should be in 1ms period)
 void Delay(uint32_t _ms){
 	volatile uint32_t _temp = millis;
 	volatile uint32_t _deltaT = millis - _temp;
@@ -57,6 +73,7 @@ void Delay(uint32_t _ms){
 		_deltaT = millis - _temp;
 	}
 }
+
 
 inline void ConfigADC(void)
 {
@@ -90,6 +107,33 @@ unsigned int readADC(unsigned int ch)
     while (!AD1CON1bits.DONE); // conversion done?
     return(ADC1BUF0);       // yes then get ADC value
 }
+uint16_t Get_ADC_Average(uint16_t ch, uint16_t samples){
+    
+    uint16_t cycles = samples % 16;
+    if( cycles == 0){
+        cycles = 1;
+    }
+    uint16_t values[cycles];
+    
+    int i, k;
+    for(i = 0; i < cycles; i++){
+        values[i] = 0;
+        for(k = 0; k < 16 && samples > 0; k++){
+            values[i] +=  readADC(ch);
+            samples--;
+        }
+        values[i] = values[i] / k;   
+    }
+    
+    for(i = 1; i < cycles; i++){
+        values[0] += values[i];
+    }
+    
+    if(cycles != 0)
+        values[0] = values[0] / cycles;
+    
+    return values[0];
+}
 
 inline void ConfigIO(void)
 {
@@ -106,15 +150,13 @@ inline void ConfigIO(void)
     TRISBbits.TRISB13 = 0;
     PORTBbits.RB13 = 0; // start with power off
     
-    //Light meter pin
+    //Light meter pins:
     ANSAbits.ANSA4 = 1;   
-    TRISAbits.TRISA4 = 1; 
-    
-    //ANSAbits. = 0;   
+    TRISAbits.TRISA4 = 1;  
     TRISAbits.TRISA7 = 0; 
 }
 
-
+/*============================ Soil functions ============================*/
 inline float CalculoTemperatura(unsigned int Reading){
     
     //float R1,RT,R0,Vout,V,beta,T0,T,Temp;
@@ -136,16 +178,9 @@ float Get_Soil_Temperature(){
     Delay(10);
     //__delay_us(10);
     
-    uint16_t Vadc = 0;
-    int i;
-    for(i = 0; i < 16; i++){
-        //AD1CON1bits.SAMP = 1;   // start sampling, then go to conversion
-        //while (!AD1CON1bits.DONE); // conversion done?
-        
-        Vadc += readADC(9);//ADC1BUF0;     // Adquire canal 9
-    }
-    Vadc=Vadc/16;
-   return CalculoTemperatura(Vadc);
+    uint16_t Vadc = Get_ADC_Average(9, 16);
+
+   return CalculoTemperatura(Vadc) - 273.15;
 }
 
 uint16_t Get_Soil_Moisture(){
@@ -155,16 +190,14 @@ uint16_t Get_Soil_Moisture(){
     PORTBbits.RB13 = 1;
     __delay_ms(1);
     
-    int i;
-    for(i = 0; i < 16; i++){
-        Vadc += readADC(10);     // Adquire canal 9
-    }
+    Vadc = Get_ADC_Average(10, 16);
     PORTBbits.RB13 = 0;
-    Vadc=Vadc/16; 
+  
     
     return Vadc;
 }
 
+/*============================ Air functions ============================*/
 void Get_SHT21(uint16_t *temperature, uint16_t *r_humidity){
     *r_humidity = SHT21_Read_Humidity();
     __delay_ms(1000);
@@ -175,47 +208,46 @@ void Get_SHT21(uint16_t *temperature, uint16_t *r_humidity){
     return;
 }
 
+/*============================ Light functions ============================*/
 #define LUX_B 13.33
 #define FEEDBACK_RESISTOR1 184600
 #define FEEDBACK_RESISTOR2 672
-#define OFFSET_REFERENCE 750000
-#define MAX_MVOLTAGE 3600
-#define MAX_READING 3480
-#define MIN_READING 630
+#define OFFSET_REFERENCE 531
+#define MAX_READING 3564
 uint32_t Rf = FEEDBACK_RESISTOR1;
-uint16_t reading_To_lux(uint16_t ADC_reading, uint32_t uV_Offset, uint32_t RF){
+uint16_t reading_To_lux(uint16_t ADC_reading, uint32_t Offset, uint32_t RF){
     
-    
+    if(ADC_reading < Offset)
+        ADC_reading = 0;
+    else
+        ADC_reading = ADC_reading - Offset;
     //to current:
-    float uvoltage = (uint32_t)5000000/(uint32_t)4096*(uint32_t)ADC_reading;
-    float ucurrent = (uvoltage-uV_Offset) / RF;
+    float uvoltage = (uint32_t)5000000/(uint32_t)4095*(uint32_t)(ADC_reading);
+    float ucurrent = (uvoltage) / RF;
     float lux = LUX_B * ucurrent;
     
-    uint32_t value = lux;
+    uint16_t value = lux;
     return value;
 }
 
 uint16_t Get_Fotodiode_Lux(){
-
-    uint16_t temp = readADC(16);
-    if(temp > MAX_READING && PORTAbits.RA7 == 0){
+    Rf = FEEDBACK_RESISTOR1;
+    PORTAbits.RA7 = 0;
+    __delay_ms(20); 
+    uint16_t temp = Get_ADC_Average(16, 16);
+    if(temp > MAX_READING){
         PORTAbits.RA7 = 1;
         Rf = FEEDBACK_RESISTOR2;
-        Delay(2); 
-        temp = readADC(16);
+        __delay_ms(20); 
+        temp = Get_ADC_Average(16, 16);
     }
-    else if(temp < MIN_READING && PORTAbits.RA7 == 1){
-        PORTAbits.RA7 = 0;
-        Rf = FEEDBACK_RESISTOR1;
-        Delay(2); 
-        temp = readADC(16);
-    } 
-    
+
     temp = reading_To_lux(temp, OFFSET_REFERENCE, Rf);
     return temp;
 }
 
 
+/*============================ Main ============================*/
 int main(void) {
     
     ConfigCLK();
@@ -223,7 +255,6 @@ int main(void) {
     ConfigIO();
     ConfigADC();
     
-    PORTAbits.RA7 = 0;
             
     I2CInit();
     __delay_ms(100);
@@ -233,8 +264,8 @@ int main(void) {
     Make_measurements_F = 1;
     uint16_t Moist, Air_Temperature, Air_R_Humidity, Lux;
     float Temp;
+    
     while(1){
-
         if(Make_measurements_F == 1){
             Temp = Get_Soil_Temperature();
             Moist = Get_Soil_Moisture();

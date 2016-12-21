@@ -12,7 +12,7 @@ function nada = teste()
 delete(instrfindall);
 
 % Init and open the serial port
-s = serial('COM7', 'baudrate', 9600);
+s = serial('COM21', 'baudrate', 9600);
 fopen(s);
 
 
@@ -20,7 +20,7 @@ fopen(s);
 
 
 %set the maximum for the values 
-y_max = 50000;
+y_max = 500;
 
 
 points = 500; %number of points on the graph at all times

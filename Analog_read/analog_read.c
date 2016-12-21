@@ -67,7 +67,7 @@ int main(void) {
     ConfigADC();
     
 	while(1){
-        values[0] = readADC(16);     // Adquire canal 9
+        values[0] = readADC(9);     // Adquire canal 9
 
         send_16bit_values(values, 1);
         __delay_ms(500); 
