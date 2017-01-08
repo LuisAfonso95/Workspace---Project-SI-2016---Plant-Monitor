@@ -10,6 +10,7 @@
 #include "config.h"
 #include <libpic30.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "UART_utils.h"
 
@@ -49,11 +50,62 @@ unsigned int readADC(unsigned int ch)
 
 inline void ConfigIO(void)
 {
-    ANSB = ~0x0484;         // RX1, TX1, RB10 digitais, restantes analogicos;
-    TRISB= 0b1111111101111111;
-    
+    ANSB = ~0x0084;         // RX1, TX1 to not analog
+    TRISBbits.TRISB2 = 1;
+    TRISBbits.TRISB7 = 0;
+       
+    //Light meter pin
     ANSAbits.ANSA4 = 1;   
     TRISAbits.TRISA4 = 1; 
+    //ANSAbits. = 0;   
+    TRISAbits.TRISA7 = 0; 
+}
+
+uint16_t Get_ADC_Average(uint16_t ch, uint16_t samples){
+    uint32_t values = 0; 
+    int k;
+    for(k = 0; k < samples; k++){
+        values +=  readADC(ch);
+    }
+    values = values / samples;   
+    return (uint16_t)values;
+}
+
+#define LUX_B 13.33
+#define FEEDBACK_RESISTOR1 184600
+#define FEEDBACK_RESISTOR2 672
+#define OFFSET_REFERENCE 36
+#define MAX_READING 3849
+uint32_t Rf = FEEDBACK_RESISTOR1;
+uint16_t reading_To_lux(uint16_t ADC_reading, uint32_t Offset, uint32_t RF){
+    
+    if(ADC_reading < Offset)
+        ADC_reading = 0;
+    else
+        ADC_reading = ADC_reading - Offset;
+    //to current:
+    float uvoltage = (uint32_t)5000000/(uint32_t)4095*(uint32_t)(ADC_reading);
+    float ucurrent = (uvoltage) / RF;
+    float lux = LUX_B * ucurrent;
+    
+    uint16_t value = lux;
+    return value;
+}
+
+uint16_t Get_Fotodiode_Lux(){
+    Rf = FEEDBACK_RESISTOR1;
+    PORTAbits.RA7 = 0;
+    __delay_ms(20); 
+    uint16_t temp = Get_ADC_Average(16, 16);
+    if(temp > MAX_READING){
+        PORTAbits.RA7 = 1;
+        Rf = FEEDBACK_RESISTOR2;
+        __delay_ms(20); 
+        temp = Get_ADC_Average(16, 16);
+    }
+
+    temp = reading_To_lux(temp, OFFSET_REFERENCE, Rf);
+    return temp;
 }
 
 unsigned int values[1];
@@ -66,11 +118,14 @@ int main(void) {
     ConfigIO();
     ConfigADC();
     
+    PORTAbits.RA7 = 0;
+   
 	while(1){
-        values[0] = readADC(16);     // Adquire canal 9
+      
+        values[0] = Get_Fotodiode_Lux();
 
         send_16bit_values(values, 1);
-        __delay_ms(500); 
+        __delay_ms(100); 
 	}
     
     

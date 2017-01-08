@@ -12,7 +12,7 @@ function nada = teste()
 delete(instrfindall);
 
 % Init and open the serial port
-s = serial('COM20', 'baudrate', 9600);
+s = serial('COM7', 'baudrate', 9600);
 fopen(s);
 
 
@@ -20,8 +20,8 @@ fopen(s);
 
 
 %set the maximum for the values 
-temp_max = 40+273.15;
-temp_min = 273.15-10;
+temp_max = 40;
+temp_min = -10;
 
 points = 500; %number of points on the graph at all times
 data_period = 96; %data period in milliseconds 
@@ -70,7 +70,7 @@ while ( strcmp(key, 's') == 0 )
 
     %save the value in a variable without a ";" so we can read the number in
     %console 
-    value1 = [y1(points) y1(points)-273.15]
+    value1 = [y1(points)]
     
     % edit just the data for the y axis on the graph. This is much, much
     % faster than ploting everything over and over again

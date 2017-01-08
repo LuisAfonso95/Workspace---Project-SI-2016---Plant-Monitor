@@ -12,7 +12,7 @@ function nada = teste()
 delete(instrfindall);
 
 % Init and open the serial port
-s = serial('COM21', 'baudrate', 9600);
+s = serial('COM7', 'baudrate', 9600);
 fopen(s);
 
 

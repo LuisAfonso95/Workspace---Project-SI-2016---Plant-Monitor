@@ -1,17 +1,26 @@
 /*
- * File:   analog_read.c
- * Author: LuisRA
  *
- * Created on December 15, 2016, 7:26 PM
+ * B, T0 and R0 are taken from the datasheet
+ * R divider = 14.95K
+ * 
+ * Inputs: 
+ *  - Pin 26 - Analog 9
+ * 
  */
 
 
-#include "xc.h"
+#include <xc.h>
 #include "config.h"
-#include <libpic30.h>
 #include <stdio.h>
+#include <math.h>
+#include <libpic30.h>
+#include <stdint.h>
 
 #include "UART_utils.h"
+#define _BETHA_ 3435
+#define _R0_ 10000 //at 25ºC
+#define _T0_ 298.15
+#define RDIVIDER 14950
 
 
 inline void ConfigADC(void)
@@ -51,28 +60,52 @@ inline void ConfigIO(void)
 {
     ANSB = ~0x0484;         // RX1, TX1, RB10 digitais, restantes analogicos;
     TRISB= 0b1111111101111111;
-    
-    ANSAbits.ANSA4 = 1;   
-    TRISAbits.TRISA4 = 1; 
 }
 
-unsigned int values[1];
-int main(void) {
+uint16_t Get_ADC_Average(uint16_t ch, uint16_t samples){
+    uint32_t values  = 0; 
+    int k;
+    for(k = 0; k < samples; k++){
+        values +=  readADC(ch);
+    }
+    values = values / samples;   
+    return (uint16_t)values;
+}
+
+inline float CalculoTemperatura(unsigned int Reading){
+    float T0 = _T0_;
+    float V = 5;
+    float beta = _BETHA_;
+    float R1 = RDIVIDER;
+    float R0 = _R0_;
+    float Vout =( 5.0 * Reading) / 4096.0;
+    float RT = ((float)R1 * Vout) / ((float)V - Vout);
+    float T = (log(RT / R0) / beta) + (1 / T0);
+    T= 1 / T;
+    return T;
+}
+float Get_Soil_Temperature(){
+    AD1CHS = 9;   
+    //Delay(10);
+    __delay_ms(10);
     
+    uint16_t Vadc = Get_ADC_Average(9, 16);
+
+   return CalculoTemperatura(Vadc) - 273.15;
+}
+
+int main(void) {
     
     ConfigCLK();
     UART1Init(9600);
-    
     ConfigIO();
     ConfigADC();
-    
-	while(1){
-        values[0] = readADC(16);     // Adquire canal 9
-
-        send_16bit_values(values, 1);
-        __delay_ms(500); 
-	}
-    
-    
+    float Temp;
+    while(1){
+        Temp = Get_Soil_Temperature();
+        uint16_t send = Temp * 100;
+        send_16bit_values(&send, 1);
+        __delay_ms(100);
+    }
     return 0;
 }
